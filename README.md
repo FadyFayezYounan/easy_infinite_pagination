@@ -46,7 +46,7 @@ class _SimpleExampleState extends State<SimpleExample> {
     await Future.delayed(const Duration(seconds: 3));
     setState(() {
       _isLoading = false;
-      // Add 10 more items to the list. This could be a network request, a database query, etc.
+      // Add 20 more items to the list. This could be a network request, a database query, etc.
       _items = List.generate(_items.length + 20, (i) => 'Item ${i + 1}');
     });
   }
@@ -75,10 +75,9 @@ class _SimpleExampleState extends State<SimpleExample> {
 
 ## Additional information
 
-- **Documentation**: For more information on how to use the Easy Infinite Pagination package, please see the [documentation](https://pub.dev/documentation/easy_infinite_pagination/latest/).
-- **Contributing**: Contributions to the Easy Infinite Pagination package are welcome! Please see the [contributing guidelines](https://github.com/raywenderlich/flutter-infinite-pagination/blob/main/CONTRIBUTING.md) for more information.
-- **Filing issues**: If you encounter any issues with the Easy Infinite Pagination package, please file an issue on the [GitHub repository](https://github.com/raywenderlich/flutter-infinite-pagination/issues).
-- **Support**: If you have any questions or need help using the Easy Infinite Pagination package, please feel free to reach out to the package authors on [GitHub](https://github.com/raywenderlich/flutter-infinite-pagination).
+<!-- - **Documentation**: For more information on how to use the Easy Infinite Pagination package, please see the [documentation](https://pub.dev/documentation/easy_infinite_pagination/latest/). -->
+- **Contributing**: Contributions to the Easy Infinite Pagination package are welcome! [GitHub repository](https://github.com/FadyFayezYounan/easy_infinite_pagination/pulls).
+- **Filing issues**: If you encounter any issues with the Easy Infinite Pagination package, please file an issue on the [GitHub repository](https://github.com/FadyFayezYounan/easy_infinite_pagination/issues).
+- **Support**: If you have any questions or need help using the Easy Infinite Pagination package, please feel free to reach out to the package authors on [GitHub](https://github.com/FadyFayezYounan).
 
 We hope you find the Easy Infinite Pagination package helpful!
-
