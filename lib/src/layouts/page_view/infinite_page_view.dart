@@ -12,7 +12,7 @@ class InfinitePageView extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.allowImplicitScrolling = false,
     this.restorationId,
-    this.pageController,
+    this.controller,
     this.scrollBehavior,
     this.scrollDirection = Axis.horizontal,
     this.dragStartBehavior = DragStartBehavior.start,
@@ -26,55 +26,133 @@ class InfinitePageView extends StatelessWidget {
     required this.delegate,
   });
 
-  /// [PaginationDelegate] contains all the necessary information for a paginated layout, such as
+  /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
   /// the item count, item builder, loading indicator builder, error indicator
   /// builder, no more items indicator builder, loading state, error state,
   /// and more.
   final PaginationDelegate delegate;
 
-  /// Matches [SliverChildBuilderDelegate.addAutomaticKeepAlives].
+  /// The `addAutomaticKeepAlives` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addAutomaticKeepAlives] property.
   final bool addAutomaticKeepAlives;
 
-  /// Matches [SliverChildBuilderDelegate.addRepaintBoundaries].
+  /// The `addRepaintBoundaries` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addRepaintBoundaries] property.
   final bool addRepaintBoundaries;
 
-  /// Matches [SliverChildBuilderDelegate.addSemanticIndexes].
+  /// The `addSemanticIndexes` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addSemanticIndexes] property.
   final bool addSemanticIndexes;
 
-  /// Matches [PageView.allowImplicitScrolling].
+  /// Controls whether the widget's pages will respond to
+  /// [RenderObject.showOnScreen], which will allow for implicit accessibility
+  /// scrolling.
+  ///
+  /// With this flag set to false, when accessibility focus reaches the end of
+  /// the current page and the user attempts to move it to the next element, the
+  /// focus will traverse to the next widget outside of the page view.
+  ///
+  /// With this flag set to true, when accessibility focus reaches the end of
+  /// the current page and user attempts to move it to the next element, focus
+  /// will traverse to the next page in the page view.
+  ///
+  /// The `allowImplicitScrolling` argument corresponds to the [PageView.allowImplicitScrolling] property.
   final bool allowImplicitScrolling;
 
-  /// Matches [PageView.restorationId].
+  /// The `restorationId` argument corresponds to the [PageView.restorationId] property.
   final String? restorationId;
 
-  /// Matches [PageView.controller].
-  final PageController? pageController;
+  /// The `controller` argument corresponds to the [PageView.controller] property.
+  final PageController? controller;
 
-  /// Matches [PageView.scrollBehavior].
+  /// How the page view should respond to user input.
+  ///
+  /// For example, determines how the page view continues to animate after the
+  /// user stops dragging the page view.
+  ///
+  /// The physics are modified to snap to page boundaries using
+  /// [PageScrollPhysics] prior to being used.
+  ///
+  /// If an explicit [ScrollBehavior] is provided to [scrollBehavior], the
+  /// [ScrollPhysics] provided by that behavior will take precedence after
+  /// [physics].
+  ///
+  /// Defaults to matching platform conventions.
+  ///
+  /// The `scrollBehavior` argument corresponds to the [PageView.scrollBehavior] property.
   final ScrollBehavior? scrollBehavior;
 
-  /// Matches [PageView.scrollDirection].
+  /// The [Axis] along which the scroll view's offset increases with each page.
+  ///
+  /// For the direction in which active scrolling may be occurring, see
+  /// [ScrollDirection].
+  ///
+  /// Defaults to [Axis.horizontal].
+  ///
+  /// The `scrollDirection` argument corresponds to the [PageView.scrollDirection] property.
   final Axis scrollDirection;
 
-  /// Matches [PageView.dragStartBehavior].
+  /// The `dragStartBehavior` argument corresponds to the [PageView.dragStartBehavior] property.
   final DragStartBehavior dragStartBehavior;
 
-  /// Matches [PageView.clipBehavior].
+  /// The `clipBehavior` argument corresponds to the [PageView.clipBehavior] property.
+  /// Defaults to [Clip.hardEdge].
   final Clip clipBehavior;
 
-  /// Matches [PageView.reverse].
+  /// Whether the page view scrolls in the reading direction.
+  ///
+  /// For example, if the reading direction is left-to-right and
+  /// [scrollDirection] is [Axis.horizontal], then the page view scrolls from
+  /// left to right when [reverse] is false and from right to left when
+  /// [reverse] is true.
+  ///
+  /// Similarly, if [scrollDirection] is [Axis.vertical], then the page view
+  /// scrolls from top to bottom when [reverse] is false and from bottom to top
+  /// when [reverse] is true.
+  ///
+  /// Defaults to false.
+  ///
+  /// The `reverse` argument corresponds to the [PageView.reverse] property.
   final bool reverse;
 
-  /// Matches [PageView.physics].
+  /// How the page view should respond to user input.
+  ///
+  /// For example, determines how the page view continues to animate after the
+  /// user stops dragging the page view.
+  ///
+  /// The physics are modified to snap to page boundaries using
+  /// [PageScrollPhysics] prior to being used.
+  ///
+  /// If an explicit [ScrollBehavior] is provided to [scrollBehavior], the
+  /// [ScrollPhysics] provided by that behavior will take precedence after
+  /// [physics].
+  ///
+  /// Defaults to matching platform conventions.
+  ///
+  /// The `physics` argument corresponds to the [PageView.physics] property.
   final ScrollPhysics? physics;
 
-  /// Matches [PageView.pageSnapping].
+  /// Set to false to disable page snapping, useful for custom scroll behavior.
+  ///
+  /// If the [padEnds] is false and [PageController.viewportFraction] < 1.0,
+  /// the page will snap to the beginning of the viewport; otherwise, the page
+  /// will snap to the center of the viewport.
+  ///
+  /// The `pageSnapping` argument corresponds to the [PageView.pageSnapping] property.
   final bool pageSnapping;
 
-  /// Matches [PageView.onPageChanged].
-  final void Function(int)? onPageChanged;
+  /// Called whenever the page in the center of the viewport changes.
+  ///
+  /// The `onPageChanged` argument corresponds to the [PageView.onPageChanged] property.
+  final ValueChanged<int>? onPageChanged;
 
-  /// Matches [PageView.padEnds].
+  /// Set to false to disable page snapping, useful for custom scroll behavior.
+  ///
+  /// If the [padEnds] is false and [PageController.viewportFraction] < 1.0,
+  /// the page will snap to the beginning of the viewport; otherwise, the page
+  /// will snap to the center of the viewport.
+  ///
+  /// The `padEnds` argument corresponds to the [PageView.padEnds] property.
   final bool padEnds;
 
   /// Whether to shrink wrap the first page indicators
@@ -98,7 +176,7 @@ class InfinitePageView extends StatelessWidget {
     return PageView.custom(
       key: key,
       restorationId: restorationId,
-      controller: pageController,
+      controller: controller,
       onPageChanged: onPageChanged,
       scrollBehavior: scrollBehavior,
       scrollDirection: scrollDirection,

@@ -13,22 +13,26 @@ class SliverInfiniteGridView extends StatelessWidget {
     this.addSemanticIndexes = true,
   });
 
-  /// [PaginationDelegate] contains all the necessary information for a paginated layout, such as
+  /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
   /// the item count, item builder, loading indicator builder, error indicator
   /// builder, no more items indicator builder, loading state, error state,
   /// and more.
   final PaginationDelegate delegate;
 
-  /// Matches [GridView.gridDelegate].
+  /// The `gridDelegate` argument is a delegate that controls the layout of the children within the [GridView] and
+  /// argument corresponds to the [GridView.gridDelegate].
   final SliverGridDelegate gridDelegate;
 
-  /// Matches [SliverChildBuilderDelegate.addAutomaticKeepAlives].
+  /// The `addAutomaticKeepAlives` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addAutomaticKeepAlives] property.
   final bool addAutomaticKeepAlives;
 
-  /// Matches [SliverChildBuilderDelegate.addRepaintBoundaries].
+  /// The `addRepaintBoundaries` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addRepaintBoundaries] property.
   final bool addRepaintBoundaries;
 
-  /// Matches [SliverChildBuilderDelegate.addSemanticIndexes].
+  /// The `addSemanticIndexes` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addSemanticIndexes] property.
   final bool addSemanticIndexes;
 
   @override

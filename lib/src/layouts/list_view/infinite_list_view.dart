@@ -62,30 +62,48 @@ class InfiniteListView extends BoxScrollView {
         _useShrinkWrapForFirstPageIndicators = shrinkWrap,
         _separatorBuilder = separatorBuilder;
 
-  /// [PaginationDelegate] contains all the necessary information for a paginated layout, such as
+  /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
   /// the item count, item builder, loading indicator builder, error indicator
   /// builder, no more items indicator builder, loading state, error state,
   /// and more.
   final PaginationDelegate delegate;
 
-  /// A [IndexedWidgetBuilder] that is used to separate the items of the list.
+  /// The `separatorBuilder` argument is used to separate the items of the list.
   final IndexedWidgetBuilder? _separatorBuilder;
 
-  /// Matches [SliverChildBuilderDelegate.addAutomaticKeepAlives].
+  /// The `addAutomaticKeepAlives` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addAutomaticKeepAlives] property.
   final bool addAutomaticKeepAlives;
 
-  /// Matches [SliverChildBuilderDelegate.addRepaintBoundaries].
+  /// The `addRepaintBoundaries` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addRepaintBoundaries] property.
   final bool addRepaintBoundaries;
 
-  /// Matches [SliverChildBuilderDelegate.addSemanticIndexes].
+  /// The `addSemanticIndexes` argument corresponds to the
+  /// [SliverChildBuilderDelegate.addSemanticIndexes] property.
   final bool addSemanticIndexes;
 
-  /// Matches [SliverFixedExtentList.itemExtent].
+  /// If non-null, forces the children to have the given extent in the scroll
+  /// direction.
+  ///
+  /// Specifying an [itemExtent] is more efficient than letting the children
+  /// determine their own extent because the scrolling machinery can make use of
+  /// the foreknowledge of the children's extent to save work, for example when
+  /// the scroll position changes drastically.
+  /// The `itemExtent` argument corresponds to the [SliverFixedExtentList.itemExtent] property.
   ///
   /// If this is not null, [prototypeItem] must be null, and vice versa.
   final double? itemExtent;
 
-  /// Matches [SliverPrototypeExtentList.prototypeItem].
+  /// If non-null, forces the children to have the same extent as the given
+  /// widget in the scroll direction.
+  ///
+  /// Specifying an [prototypeItem] is more efficient than letting the children
+  /// determine their own extent because the scrolling machinery can make use of
+  /// the foreknowledge of the children's extent to save work, for example when
+  /// the scroll position changes drastically.
+  ///
+  /// The `prototypeItem` argument corresponds to the [SliverPrototypeExtentList.prototypeItem] property.
   ///
   /// If this is not null, [itemExtent] must be null, and vice versa.
   final Widget? prototypeItem;
