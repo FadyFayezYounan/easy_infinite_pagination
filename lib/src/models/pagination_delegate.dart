@@ -159,8 +159,7 @@ final class PaginationDelegate {
       return PaginationStatus.firstPageError;
     }
     // If the delegate has not found any items while loading the first page and there is only one item
-    else if (_hasNoItems &&
-        (effectiveItemCount == 1 || effectiveItemCount == 0)) {
+    else if (_hasNoItems) {
       return PaginationStatus.firstPageNoItemsFound;
     }
     // If the delegate is in the process of loading more items

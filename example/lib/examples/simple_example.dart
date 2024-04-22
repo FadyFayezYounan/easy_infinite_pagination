@@ -19,7 +19,7 @@ class _SimpleExampleState extends State<SimpleExample> {
     await Future.delayed(const Duration(seconds: 3));
     setState(() {
       _isLoading = false;
-      // Add 10 more items to the list. This could be a network request, a database query, etc.
+      // Add 20 more items to the list. This could be a network request, a database query, etc.
       _items = List.generate(_items.length + 20, (i) => 'Item ${i + 1}');
     });
   }
