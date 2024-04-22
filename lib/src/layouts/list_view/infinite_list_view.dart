@@ -4,10 +4,15 @@ import '../../models/models.dart';
 import 'sliver_infinite_list_view.dart';
 
 class InfiniteListView extends BoxScrollView {
-  /// The InfiniteListView widget is a paginated layout that allows you to display a large number of items efficiently.
-  /// It is designed to be used with a PaginationDelegate, which provides the necessary information for the layout,
-  /// such as the item count, item builder, loading indicator builder, error indicator builder, no more items indicator builder,
+  /// The `InfiniteListView` widget in Flutter is a specialized version of the `ListView.builder` widget that is designed for handling large datasets efficiently.
+  /// It uses a pagination approach to load and display data in pages as the user scrolls down the list.
+  /// This helps to improve performance and reduce memory usage, especially when dealing with large datasets that cannot be fully loaded into memory at once.
+  ///
+  /// The `InfiniteListView` widget takes a `PaginationDelegate` as its main parameter, which defines the behavior of the list,
+  /// including the item count, item builder, loading indicator builder, error indicator builder, no more items indicator builder,
   /// loading state, error state, and more.
+  ///
+  /// Overall, the `InfiniteListView` widget is a powerful and efficient solution for building paginated lists in Flutter applications, especially when dealing with large datasets.
   const InfiniteListView({
     super.key,
     super.scrollDirection,

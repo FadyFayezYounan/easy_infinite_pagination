@@ -4,10 +4,15 @@ import '../../core/core.dart';
 import '../../models/models.dart';
 
 class SliverInfiniteListView extends StatelessWidget {
-  /// A customizable sliver list that supports infinite scrolling.
+  /// The `SliverInfiniteListView` widget in Flutter is a specialized version of the `SliverList.builder` widget that is designed for handling large datasets efficiently.
+  /// It uses a pagination approach to load and display data in pages as the user scrolls down the list.
+  /// This helps to improve performance and reduce memory usage, especially when dealing with large datasets that cannot be fully loaded into memory at once.
   ///
-  /// This widget is designed to be used within a CustomScrollView to display a list of items with various features such as separators,
-  /// bottom loader.
+  /// The `SliverInfiniteListView` widget takes a `PaginationDelegate` as its main parameter, which defines the behavior of the list,
+  /// including the item count, item builder, loading indicator builder, error indicator builder, no more items indicator builder,
+  /// loading state, error state, and more.
+  ///
+  /// Overall, the `SliverInfiniteListView` widget is a powerful and efficient solution for building paginated lists in Flutter applications, especially when dealing with large datasets.
   const SliverInfiniteListView({
     super.key,
     required this.delegate,
