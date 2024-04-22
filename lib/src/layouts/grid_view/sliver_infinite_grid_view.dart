@@ -47,7 +47,7 @@ class SliverInfiniteGridView extends StatelessWidget {
     WidgetBuilder? bottomLoaderBuilder,
   ) {
     return SliverGrid(
-      delegate: AppendedBottomLoaderSliverChildBuilderDelegate(
+      delegate: PaginationLayoutBuilder.createSliverDelegate(
         builder: itemBuilder,
         childCount: itemCount,
         bottomLoaderBuilder: bottomLoaderBuilder,

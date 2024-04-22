@@ -153,7 +153,7 @@ class SliverInfiniteListView extends StatelessWidget {
     final separatorBuilder = _separatorBuilder;
     return separatorBuilder == null
         // Build the regular delegate.
-        ? AppendedBottomLoaderSliverChildBuilderDelegate(
+        ? PaginationLayoutBuilder.createSliverDelegate(
             builder: itemBuilder,
             childCount: itemCount,
             bottomLoaderBuilder: bottomLoaderBuilder,
@@ -163,7 +163,7 @@ class SliverInfiniteListView extends StatelessWidget {
             semanticIndexCallback: semanticIndexCallback,
           )
         // Build the delegate with a separator builder.
-        : AppendedBottomLoaderSliverChildBuilderDelegate.separated(
+        : PaginationLayoutBuilder.createSeparatedSliverDelegate(
             builder: itemBuilder,
             childCount: itemCount,
             bottomLoaderBuilder: bottomLoaderBuilder,

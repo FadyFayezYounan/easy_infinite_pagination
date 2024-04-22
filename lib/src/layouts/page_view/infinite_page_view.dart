@@ -109,7 +109,7 @@ class InfinitePageView extends StatelessWidget {
       physics: physics,
       pageSnapping: pageSnapping,
       padEnds: padEnds,
-      childrenDelegate: AppendedBottomLoaderSliverChildBuilderDelegate(
+      childrenDelegate: PaginationLayoutBuilder.createSliverDelegate(
         builder: itemBuilder,
         childCount: itemCount,
         bottomLoaderBuilder: bottomLoaderBuilder,

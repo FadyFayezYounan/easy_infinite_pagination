@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../models/models.dart';
 import '../utils/utils.dart';
 import '../widgets/widgets.dart';
+import 'appended_bottom_loader_sliver_child_builder_delegate.dart';
 
 class PaginationLayoutBuilder extends StatefulWidget {
   /// A widget that builds a layout based on pagination status using a custom layout strategy.
@@ -25,7 +24,7 @@ class PaginationLayoutBuilder extends StatefulWidget {
   /// layoutStrategy: LayoutStrategy.sliver,
   /// delegate: PaginationDelegate(...),
   ///   layoutChildBuilder: (context, itemBuilder, itemCount, bottomLoaderBuilder) {
-  ///     return ListView.builder(
+  ///     return SliverList.builder(
   ///       itemBuilder: itemBuilder,
   ///       itemCount: itemCount,
   ///     );
@@ -51,6 +50,59 @@ class PaginationLayoutBuilder extends StatefulWidget {
 
   /// Whether to use shrink wrap for first page indicators.
   final bool useShrinkWrapForFirstPageIndicators;
+
+  /// Creates a new [AppendedBottomLoaderSliverChildBuilderDelegate] with the provided parameters.
+  ///
+  /// The [builder] parameter is used to build the item widget for each index.
+  /// The [childCount] parameter is the total number of children.
+  /// The [bottomLoaderBuilder] parameter is used to build the bottom loader widget.
+  /// The [addAutomaticKeepAlives] parameter determines whether to add automatic keep alives.
+  /// The [addRepaintBoundaries] parameter determines whether to add repaint boundaries.
+  /// The [addSemanticIndexes] parameter determines whether to add semantic indexes.
+  /// The [semanticIndexCallback] parameter is used to generate semantic indexes.
+  ///
+  /// Returns an instance of [AppendedBottomLoaderSliverChildBuilderDelegate].
+  static AppendedBottomLoaderSliverChildBuilderDelegate createSliverDelegate({
+    required IndexedWidgetBuilder builder,
+    required int childCount,
+    WidgetBuilder? bottomLoaderBuilder,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    SemanticIndexCallback? semanticIndexCallback,
+  }) {
+    return AppendedBottomLoaderSliverChildBuilderDelegate(
+      builder: builder,
+      childCount: childCount,
+      bottomLoaderBuilder: bottomLoaderBuilder,
+      addAutomaticKeepAlives: addAutomaticKeepAlives,
+      addRepaintBoundaries: addRepaintBoundaries,
+      addSemanticIndexes: addSemanticIndexes,
+      semanticIndexCallback: semanticIndexCallback,
+    );
+  }
+
+  static AppendedBottomLoaderSliverChildBuilderDelegate
+      createSeparatedSliverDelegate({
+    required IndexedWidgetBuilder builder,
+    required IndexedWidgetBuilder separatorBuilder,
+    required int childCount,
+    WidgetBuilder? bottomLoaderBuilder,
+    bool addAutomaticKeepAlives = true,
+    bool addRepaintBoundaries = true,
+    bool addSemanticIndexes = true,
+    SemanticIndexCallback? semanticIndexCallback,
+  }) {
+    return AppendedBottomLoaderSliverChildBuilderDelegate.separated(
+      builder: builder,
+      separatorBuilder: separatorBuilder,
+      childCount: childCount,
+      bottomLoaderBuilder: bottomLoaderBuilder,
+      addAutomaticKeepAlives: addAutomaticKeepAlives,
+      addRepaintBoundaries: addRepaintBoundaries,
+      addSemanticIndexes: addSemanticIndexes,
+    );
+  }
 
   @override
   State<PaginationLayoutBuilder> createState() =>
