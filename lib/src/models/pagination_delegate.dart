@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart'
     show IndexedWidgetBuilder, WidgetBuilder, VoidCallback;
 
@@ -147,9 +149,6 @@ final class PaginationDelegate {
   ///
   /// The status is determined based on the values of [isLoading], [hasError], [hasReachedMax] and [effectiveItemCount].
   PaginationStatus get paginationStatus {
-    //[Note that]: effectiveItemCount == 1 means that no items are founded,
-    // which means that we are not paginating.
-
     // If the delegate is loading the first page and there is only one item
     if (isLoading && effectiveItemCount == 1) {
       return PaginationStatus.firstPageLoading;
@@ -158,7 +157,8 @@ final class PaginationDelegate {
     else if (hasError && effectiveItemCount == 1) {
       return PaginationStatus.firstPageError;
     }
-    // If the delegate has not found any items while loading the first page and there is only one item
+
+    // If the delegate has not found any items while loading the first page.
     else if (_hasNoItems) {
       return PaginationStatus.firstPageNoItemsFound;
     }
