@@ -21,11 +21,7 @@ class PostsGridCubit extends Cubit<PostsGridState> {
 
   Future<void> fetchPosts({bool refresh = false}) async {
     // If the `refresh` parameter is `true`, invalidates the current state by
-    // setting the `isLoading` flag to `true` and emitting a new state that
-    // resets the `page` and `hasReachedMax` values to their initial state.
-    //
-    // If the `refresh` parameter is `false`, just sets the `isLoading` flag
-    // to `true` and emits a new state.
+    // returning a new state with the `invalidateSelf` method.
     if (refresh) {
       emit(state.invalidateSelf());
     } else {
