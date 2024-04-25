@@ -75,6 +75,15 @@ class _SimpleExampleState extends State<SimpleExample> {
 }
 ```
 
+## Available Widgets
+
+- `InfiniteListView` and `InfiniteListView.separated`
+- `SliverInfiniteListView` and `SliverInfiniteListView.separated`
+- `InfiniteGridView`
+- `SliverInfiniteGridView`
+- `InfinitePageView`
+- `PaginationLayoutBuilder`: for custom pagination layouts scenarios
+
 ## Customizable Indicators
 
 - With `easy_infinite_pagination` you can customize the appearance of the pagination indicators as you like. Include `firstPageLoading`, `firstPageError`, `firstPageNoItemsFound`, `loadMoreLoading`, `loadMoreError`, and `loadMoreReachedLastPage`.
