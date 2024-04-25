@@ -39,7 +39,7 @@ class SimpleExample extends StatefulWidget {
 
 class _SimpleExampleState extends State<SimpleExample> {
   List<String> _items = [];
-  bool _isLoading = false;
+  bool _isLoading = true;
 
   void _fetchData() async {
     setState(() {
@@ -74,6 +74,39 @@ class _SimpleExampleState extends State<SimpleExample> {
   }
 }
 ```
+
+## Customizable Indicators
+
+- With `easy_infinite_pagination` you can customize the appearance of the pagination indicators as you like. Include `firstPageLoading`, `firstPageError`, `firstPageNoItemsFound`, `loadMoreLoading`, `loadMoreError`, and `loadMoreReachedLastPage`.
+- see full example [custom_indicators_example](example/lib/examples/custom_indicators_example/custom_indicators_example.dart).
+
+```dart
+      InfiniteListView(
+        delegate: PaginationDelegate(
+          itemCount: _items.length,
+          itemBuilder: (context, index) => ListTile(
+            title: DefaultListTile(index: index),
+          ),
+          isLoading: _isLoading,
+          onFetchData: _fetchData,
+          firstPageLoadingBuilder: (context) =>
+              const FirstPageLoadingIndicator(),
+          firstPageErrorBuilder: (context) => FirstPageErrorIndicator(
+            onRetry: _fetchData,
+          ),
+          firstPageNoItemsBuilder: (context) =>
+              const FirstPageNoItemsFoundedIndicator(),
+          loadMoreLoadingBuilder: (context) => const LoadMoreLoadingIndicator(),
+          loadMoreErrorBuilder: (context) => LoadMoreErrorIndicator(
+            onRetry: _fetchData,
+          ),
+          loadMoreNoMoreItemsBuilder: (context) =>
+              const LoadMoreNoMoreItemsIndicator(),
+        ),
+      ),
+  ```
+
+## How to use `easy_infinite_pagination` with Bloc
 
 ## Additional information
 

@@ -7,8 +7,6 @@ sealed class PostsListState extends Equatable {
   List<Object> get props => [];
 }
 
-final class PostsFetchInitial extends PostsListState {}
-
 final class PostsFetchLoading extends PostsListState {}
 
 final class PostsFetchLoaded extends PostsListState {}

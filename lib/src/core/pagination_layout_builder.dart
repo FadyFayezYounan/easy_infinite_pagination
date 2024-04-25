@@ -239,6 +239,14 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
   }
 
   @override
+  void didUpdateWidget(covariant PaginationLayoutBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!widget.delegate.hasReachedMax && oldWidget.delegate.hasReachedMax) {
+      _fetchData();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return switch (_delegate.paginationStatus) {
       PaginationStatus.firstPageLoading => FirstPageIndicatorWidgetBuilder(

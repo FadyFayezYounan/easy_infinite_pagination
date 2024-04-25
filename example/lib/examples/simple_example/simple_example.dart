@@ -10,7 +10,7 @@ class SimpleExample extends StatefulWidget {
 
 class _SimpleExampleState extends State<SimpleExample> {
   List<String> _items = [];
-  bool _isLoading = false;
+  bool _isLoading = true;
 
   void _fetchData() async {
     setState(() {

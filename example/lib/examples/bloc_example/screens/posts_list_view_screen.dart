@@ -22,8 +22,7 @@ class PostListViewScreen extends StatelessWidget {
               onRefresh: context.read<PostsListCubit>().refreshPosts,
               child: InfiniteListView.separated(
                 delegate: PaginationDelegate(
-                  isLoading:
-                      state is PostsFetchLoading || state is PostsFetchInitial,
+                  isLoading: state is PostsFetchLoading,
                   hasError: state is PostsFetchError,
                   hasReachedMax: context.read<PostsListCubit>().hasReachedMax,
                   // The number of remaining invisible items that should trigger a new fetch.

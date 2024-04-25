@@ -9,7 +9,7 @@ import '../../models/post_model.dart';
 part 'posts_list_state.dart';
 
 class PostsListCubit extends Cubit<PostsListState> {
-  PostsListCubit() : super(PostsFetchInitial());
+  PostsListCubit() : super(PostsFetchLoading());
 
   /// List of all posts fetched so far.
   List<Post> get allPosts => List.unmodifiable(_allPosts);
