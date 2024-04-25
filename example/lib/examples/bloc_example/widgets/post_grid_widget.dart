@@ -11,8 +11,7 @@ class PostGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.grey.shade100,
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

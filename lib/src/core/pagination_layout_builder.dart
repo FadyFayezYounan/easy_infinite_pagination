@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -62,7 +64,8 @@ class PaginationLayoutBuilder extends StatefulWidget {
   /// The [semanticIndexCallback] parameter is used to generate semantic indexes.
   ///
   /// Returns an instance of [AppendedBottomLoaderSliverChildBuilderDelegate].
-  static AppendedBottomLoaderSliverChildBuilderDelegate createSliverDelegate({
+  static AppendedBottomLoaderSliverChildBuilderDelegate
+      createSliverChildDelegate({
     required IndexedWidgetBuilder builder,
     required int childCount,
     WidgetBuilder? bottomLoaderBuilder,
@@ -83,7 +86,7 @@ class PaginationLayoutBuilder extends StatefulWidget {
   }
 
   static AppendedBottomLoaderSliverChildBuilderDelegate
-      createSeparatedSliverDelegate({
+      createSeparatedSliverChildDelegate({
     required IndexedWidgetBuilder builder,
     required IndexedWidgetBuilder separatorBuilder,
     required int childCount,
@@ -113,8 +116,7 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
     with LayoutCompleteMixin<PaginationLayoutBuilder> {
   /// The [_debouncer] is used to debounce the pagination loading.
   ///
-  /// It's initialized in the [onLayoutComplete] method and debounces the
-  /// [_delegate.onFetchData] method call in the [onLayoutComplete] method.
+  /// It's initialized in the [onLayoutComplete] method.
   late final Debouncer _debouncer;
   /*
   Debouncer is a utility class provided by the package. It's used to delay
@@ -238,7 +240,6 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
 
   @override
   Widget build(BuildContext context) {
-    // log("current status: ${_delegate.paginationStatus}");
     return switch (_delegate.paginationStatus) {
       PaginationStatus.firstPageLoading => FirstPageIndicatorWidgetBuilder(
           builder: _firstPageLoadingBuilder,
@@ -278,7 +279,7 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
 
   /// Builds an item at the specified index.
   ///
-  /// If the [index] is equal to [fetchAtIndex], it invokes [_onBuiltLastItem].
+  /// If the [index] is equal to [_delegate.fetchAtIndex], it invokes [_onBuiltLastItem].
   ///
   /// Parameters:
   ///   - [context]: The build context.

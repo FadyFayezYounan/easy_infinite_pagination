@@ -23,14 +23,14 @@ class FirstPageNoItemsBuilder extends StatelessWidget {
           children: [
             // Error message title
             Text(
-              'No items found',
+              'No items found!',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 16.0),
             // Error message description
             const Text(
-              'The list is currently empty.',
+              'Oops, it seems that there are no items in this list.',
               textAlign: TextAlign.center,
             ),
           ],

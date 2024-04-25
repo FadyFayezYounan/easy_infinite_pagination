@@ -6,7 +6,9 @@ import '../../models/models.dart';
 
 class InfinitePageView extends StatelessWidget {
   /// The `InfinitePageView` is similar to [PageView], but it allows for infinite scrolling in both directions.
-  /// The `InfinitePageView` widget is a paginated layout that allows for infinite scrolling in both directions. It uses a PageView internally to display the pages, and it manages the loading and display of items as the user scrolls.
+  ///
+  /// The `InfinitePageView` widget is a paginated layout that allows for infinite scrolling in both directions.
+  /// It uses a PageView internally to display the pages, and it manages the loading and display of items as the user scrolls.
   const InfinitePageView({
     super.key,
     this.addAutomaticKeepAlives = true,
@@ -189,7 +191,7 @@ class InfinitePageView extends StatelessWidget {
       physics: physics,
       pageSnapping: pageSnapping,
       padEnds: padEnds,
-      childrenDelegate: PaginationLayoutBuilder.createSliverDelegate(
+      childrenDelegate: PaginationLayoutBuilder.createSliverChildDelegate(
         builder: itemBuilder,
         childCount: itemCount,
         bottomLoaderBuilder: bottomLoaderBuilder,

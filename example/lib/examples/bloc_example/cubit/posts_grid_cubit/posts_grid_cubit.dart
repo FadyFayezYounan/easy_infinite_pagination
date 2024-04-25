@@ -40,6 +40,7 @@ class PostsGridCubit extends Cubit<PostsGridState> {
         posts: List.of(state.posts)..addAll(posts),
         hasReachedMax: posts.length < 25,
         page: state.page + 1,
+        hasError: false,
       ));
     } catch (e) {
       // If an error occurs, update the state with the hasError flag set to true.
@@ -71,5 +72,11 @@ class PostsGridCubit extends Cubit<PostsGridState> {
       return body.map((dynamic json) => Post.fromJson(json)).toList();
     }
     throw Exception('Something went wrong while fetching posts');
+  }
+
+  @override
+  void emit(PostsGridState state) {
+    if (isClosed) return;
+    super.emit(state);
   }
 }

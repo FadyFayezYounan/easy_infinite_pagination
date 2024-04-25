@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_infinite_pagination/easy_infinite_pagination.dart';
 
-import 'custom_pagination_example.dart';
+import 'infinite_masonry_grid_view.dart';
 import 'masonry_grid_item.dart';
 
 class CustomPaginationExampleScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _CustomPaginationExampleScreenState
     setState(() {
       _isLoading = true;
     });
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     setState(() {
       _isLoading = false;
       // Add 20 more items to the list. This could be a network request, a database query, etc.
@@ -32,8 +32,9 @@ class _CustomPaginationExampleScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Custom Pagination')),
+      appBar: AppBar(title: const Text('Custom Pagination Example')),
       body: InfiniteMasonryGridView.count(
+        padding: const EdgeInsets.all(16.0),
         paginationDelegate: PaginationDelegate(
           itemCount: _items.length,
           isLoading: _isLoading,

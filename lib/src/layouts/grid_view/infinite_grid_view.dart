@@ -5,12 +5,14 @@ import 'sliver_infinite_grid_view.dart';
 
 class InfiniteGridView extends BoxScrollView {
   /// The `InfiniteGridView` is similar to [GridView.builder], but it allows for infinite scrolling in both directions.
+  ///
   /// The `InfiniteGridView` widget is a paginated layout that displays items in a grid view.
   /// It uses a PaginationDelegate to manage the data and state of the layout,
   /// and a SliverGridDelegate to control the layout of the items.
   ///
   /// The `InfiniteGridView` can be used to create layouts with an infinite number of items,
   /// and it supports features such as loading indicators, error indicators, and no more items indicators.
+  ///
   /// The `InfiniteGridView` widget is a good choice for creating paginated layouts that are visually appealing and easy to use.
   /// It is also a good choice for layouts that need to support a large number of items.
   const InfiniteGridView({

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 ///
 /// This widget is used as a placeholder when the app is still fetching data
 /// for the first page of a paginated list.
-///
-/// The [context] parameter is the [BuildContext] of the current build.
 Widget firstPageLoadingBuilder(BuildContext context) {
   return const FirstPageLoadingBuilder();
 }

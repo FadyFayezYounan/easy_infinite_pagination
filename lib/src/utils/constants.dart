@@ -24,4 +24,9 @@ const int defaultInvisibleItemsThreshold = 3;
 const double defaultBottomLoaderPadding = 16.0;
 
 /// The default error message that is displayed when an error occurs.
-const String defaultErrorMessage = 'Something went wrong. Tap to try again.';
+const String defaultLoadMoreErrorMessage =
+    'Something went wrong. Tap to try again.';
+
+/// The default error message that is displayed when an error occurs while fetching the first page of data.
+const String defaultFirstPageErrorMessage =
+    'An error occurred while fetching data.\n Please try again later.';

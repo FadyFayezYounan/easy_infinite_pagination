@@ -1,14 +1,16 @@
 import 'package:easy_infinite_pagination/easy_infinite_pagination.dart';
 import 'package:flutter/material.dart';
 
-class SimpleExample extends StatefulWidget {
-  const SimpleExample({super.key});
+import 'page_view_item.dart';
+
+class PageViewExampleScreen extends StatefulWidget {
+  const PageViewExampleScreen({super.key});
 
   @override
-  State<SimpleExample> createState() => _SimpleExampleState();
+  State<PageViewExampleScreen> createState() => _PageViewExampleScreenState();
 }
 
-class _SimpleExampleState extends State<SimpleExample> {
+class _PageViewExampleScreenState extends State<PageViewExampleScreen> {
   List<String> _items = [];
   bool _isLoading = false;
 
@@ -17,26 +19,27 @@ class _SimpleExampleState extends State<SimpleExample> {
       _isLoading = true;
     });
     await Future.delayed(const Duration(seconds: 2));
+
     setState(() {
       _isLoading = false;
-      // Add 20 more items to the list. This could be a network request, a database query, etc.
-      _items = List.generate(_items.length + 20, (i) => 'Item ${i + 1}');
+      // Add 5 more items to the list. This could be a network request, a database query, etc.
+      _items = List.generate(_items.length + 5, (i) => 'Page ${i + 1}');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Simple Example'),
-      ),
-      body: InfiniteListView(
+      appBar: AppBar(title: const Text('PageView Example')),
+      body: InfinitePageView(
+        scrollDirection: Axis.vertical,
         delegate: PaginationDelegate(
           itemCount: _items.length,
           itemBuilder: (_, index) => ListTile(
-            title: Text(_items[index]),
+            title: PageViewItem(index: index),
           ),
           isLoading: _isLoading,
+          invisibleItemsThreshold: 1,
           onFetchData: _fetchData,
         ),
       ),

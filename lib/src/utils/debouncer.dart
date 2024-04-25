@@ -1,10 +1,10 @@
 import 'dart:async' show Timer;
 import 'dart:ui';
 
-/// A class that debounces the execution of a callback function.
-///
-/// This is useful for cases where you want to delay the execution of a function
-/// until a certain amount of time has passed since the last time it was called.
+/// `Debouncer` is a utility class provided by the package. It's used to delay
+/// execution of a function. This is useful in situations where the function
+/// is called multiple times in a short period of time and we want to execute
+/// the function only once after the delay has passed.
 class Debouncer {
   /// The delay after the last invocation of the callback function before it is executed.
   final Duration _delay;
@@ -16,11 +16,6 @@ class Debouncer {
   ///
   /// The [delay] parameter specifies the duration to wait before executing the callback function.
   Debouncer(this._delay);
-
-  /// Creates a new debouncer with a zero delay.
-  ///
-  /// This is useful for cases where you want to execute the callback function immediately.
-  Debouncer.zero() : _delay = Duration.zero;
 
   /// Executes the callback function after the specified delay.
   ///

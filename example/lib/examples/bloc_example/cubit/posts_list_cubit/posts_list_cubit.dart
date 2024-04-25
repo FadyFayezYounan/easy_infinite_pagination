@@ -9,7 +9,7 @@ import '../../models/post_model.dart';
 part 'posts_list_state.dart';
 
 class PostsListCubit extends Cubit<PostsListState> {
-  PostsListCubit() : super(PostsFetchLoading());
+  PostsListCubit() : super(PostsFetchInitial());
 
   /// List of all posts fetched so far.
   List<Post> get allPosts => List.unmodifiable(_allPosts);
@@ -76,5 +76,11 @@ class PostsListCubit extends Cubit<PostsListState> {
       return body.map((dynamic json) => Post.fromJson(json)).toList();
     }
     throw Exception('Something went wrong while fetching posts');
+  }
+
+  @override
+  void emit(PostsListState state) {
+    if (isClosed) return;
+    super.emit(state);
   }
 }

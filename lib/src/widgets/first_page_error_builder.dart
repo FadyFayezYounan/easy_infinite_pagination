@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/utils.dart';
+
 /// Builds a widget for displaying an error message when the first page
 /// of the application fails to load.
 ///
@@ -38,8 +40,7 @@ class FirstPageErrorBuilder extends StatelessWidget {
             const SizedBox(height: 16.0),
             // Error message description
             const Text(
-              'The application has encountered an unknown error.\n'
-              'Please try again later.',
+              defaultFirstPageErrorMessage,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 48.0),

@@ -3,6 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+// THE FOLLOWING CODE SHOW HOW TO IMPLEMENT A CUSTOM PAGINATION,
+// IF YOU ARE USING MASONRY GRID VIEW IN YOUR APP, YOU CAN USE THE FOLLOWING CODE
+// TO ADD INFINITE PAGINATION TO MASONRY GRID VIEW.
+
 class InfiniteMasonryGridView extends StatelessWidget {
   /// A widget that displays a masonry grid view with infinite pagination.
   ///
@@ -170,10 +174,10 @@ class InfiniteMasonryGridView extends StatelessWidget {
         gridDelegate: gridDelegate,
         mainAxisSpacing: mainAxisSpacing,
         crossAxisSpacing: crossAxisSpacing,
-        padding: const EdgeInsets.all(16),
+        padding: padding,
         // Here we create a predefined sliver delegate by the package
         // this delegate is used to handle the bottom loader widget while loading, success and error state.
-        childrenDelegate: PaginationLayoutBuilder.createSliverDelegate(
+        childrenDelegate: PaginationLayoutBuilder.createSliverChildDelegate(
           builder: itemBuilder,
           childCount: itemCount,
           bottomLoaderBuilder: bottomLoaderBuilder,

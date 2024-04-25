@@ -62,7 +62,7 @@ class InfiniteListView extends BoxScrollView {
     super.shrinkWrap,
   })  : assert(
           itemExtent == null || prototypeItem == null,
-          'You can only pass itemExtent or prototypeItem, not both',
+          'Only one of itemExtent or prototypeItem can be used, not both',
         ),
         _useShrinkWrapForFirstPageIndicators = shrinkWrap,
         _separatorBuilder = separatorBuilder;

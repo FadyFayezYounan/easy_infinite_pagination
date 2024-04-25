@@ -12,7 +12,6 @@ class MasonryItem extends StatelessWidget {
     return Container(
       height: (index % 5 + 1) * 100,
       color: const Color(0xFF34568B),
-      padding: const EdgeInsets.all(32),
       child: Center(
         child: CircleAvatar(
           minRadius: 24,

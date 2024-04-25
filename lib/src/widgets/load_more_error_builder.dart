@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/utils.dart';
@@ -39,9 +40,11 @@ class LoadMoreErrorBuilder extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              defaultErrorMessage,
-              textAlign: TextAlign.center,
+            Flexible(
+              child: Text(
+                defaultLoadMoreErrorMessage,
+                textAlign: TextAlign.center,
+              ),
             ),
             SizedBox(height: 4.0),
             Icon(

@@ -1,5 +1,3 @@
-import 'package:example/examples/bloc_example/screens/posts_grid_view_screen.dart';
-import 'package:example/examples/bloc_example/screens/posts_list_view_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'examples/examples.dart';
@@ -16,8 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -39,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _examples = [
     const SimpleExample(),
     const PostListViewScreen(),
-    //const PostListViewScreen(),
-    const PostsGridViewScreen(),
+    const PageViewExampleScreen(),
+    const PostsSliverGridViewScreen(),
     const CustomPaginationExampleScreen(),
   ];
 
@@ -61,8 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
           NavigationDestination(icon: Icon(Icons.abc), label: "Simple"),
           NavigationDestination(
               icon: Icon(Icons.list_alt_rounded), label: "ListView"),
-          // NavigationDestination(
-          //     icon: Icon(Icons.reorder_rounded), label: "Sliver"),
+          NavigationDestination(
+              icon: Icon(Icons.auto_stories_rounded), label: "PageView"),
           NavigationDestination(
               icon: Icon(Icons.apps_rounded), label: "GridView"),
           NavigationDestination(
