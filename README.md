@@ -17,7 +17,7 @@ The Easy Infinite Pagination package provides a simple and customizable way to i
 
 - **Efficient**: The package uses a number of optimizations to ensure that it is efficient, even for large datasets.
 
-- **Extensible**: The package can be extended to support custom pagination scenarios for example suppose that you want to add pagination for `flutter_staggered_grid_view` you can do that by wrapping your widget with `PaginationLayoutBuilder` see full example [custom pagination example](example/lib/examples/custom_example/infinite_masonry_grid_view.dart).  
+- **Extensible**: The package can be extended to support custom pagination scenarios for example suppose that you want to add pagination for [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view) you can do that by wrapping your widget with `PaginationLayoutBuilder` see [Support Custom Pagination Layouts](#customLayout-example).  
 
 ## Getting started
 
@@ -159,10 +159,12 @@ InfiniteListView.separated(
   )
 ```
 
+<a id="customLayout-example"></a>
+
 ## Support Custom Pagination Layouts
 
 - To create a new sliver layout, if `InfiniteListView`, `SliverInfiniteListView`, `InfiniteGridView`,`SliverInfiniteGridView`, and`InfinitePageView` do not meet your requirements, with `easy_infinite_pagination` you can make your own pagination layout.
-- For example suppose that you want to add pagination for `flutter_staggered_grid_view` you can do that by wrapping your widget with `PaginationLayoutBuilder`.
+- For example suppose that you want to add pagination for [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view) you can do that by wrapping your widget with `PaginationLayoutBuilder`.
 - see full example [custom pagination example](example/lib/examples/custom_example/infinite_masonry_grid_view.dart).
 
 ```dart
