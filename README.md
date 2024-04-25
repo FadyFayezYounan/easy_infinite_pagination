@@ -78,35 +78,67 @@ class _SimpleExampleState extends State<SimpleExample> {
 ## Customizable Indicators
 
 - With `easy_infinite_pagination` you can customize the appearance of the pagination indicators as you like. Include `firstPageLoading`, `firstPageError`, `firstPageNoItemsFound`, `loadMoreLoading`, `loadMoreError`, and `loadMoreReachedLastPage`.
-- see full example [custom_indicators_example](example/lib/examples/custom_indicators_example/custom_indicators_example.dart).
+- see full example [custom indicators example](example/lib/examples/custom_indicators_example/custom_indicators_example.dart).
 
 ```dart
-      InfiniteListView(
-        delegate: PaginationDelegate(
-          itemCount: _items.length,
-          itemBuilder: (context, index) => ListTile(
-            title: DefaultListTile(index: index),
-          ),
-          isLoading: _isLoading,
-          onFetchData: _fetchData,
-          firstPageLoadingBuilder: (context) =>
-              const FirstPageLoadingIndicator(),
-          firstPageErrorBuilder: (context) => FirstPageErrorIndicator(
-            onRetry: _fetchData,
-          ),
-          firstPageNoItemsBuilder: (context) =>
-              const FirstPageNoItemsFoundedIndicator(),
-          loadMoreLoadingBuilder: (context) => const LoadMoreLoadingIndicator(),
-          loadMoreErrorBuilder: (context) => LoadMoreErrorIndicator(
-            onRetry: _fetchData,
-          ),
-          loadMoreNoMoreItemsBuilder: (context) =>
-              const LoadMoreNoMoreItemsIndicator(),
-        ),
-      ),
+InfiniteListView(
+  delegate: PaginationDelegate(
+    itemCount: _items.length,
+    itemBuilder: (context, index) => ListTile(
+      title: DefaultListTile(index: index),
+    ),
+    isLoading: _isLoading,
+    onFetchData: _fetchData,
+    firstPageLoadingBuilder: (context) =>
+        const FirstPageLoadingIndicator(),
+    firstPageErrorBuilder: (context) => FirstPageErrorIndicator(
+      onRetry: _fetchData,
+    ),
+    firstPageNoItemsBuilder: (context) =>
+        const FirstPageNoItemsFoundedIndicator(),
+    loadMoreLoadingBuilder: (context) => const LoadMoreLoadingIndicator(),
+    loadMoreErrorBuilder: (context) => LoadMoreErrorIndicator(
+      onRetry: _fetchData,
+    ),
+    loadMoreNoMoreItemsBuilder: (context) =>
+        const LoadMoreNoMoreItemsIndicator(),
+    ),
+  ),
   ```
 
 ## How to use `easy_infinite_pagination` with Bloc
+
+- The `easy_infinite_pagination` package is designed to work with any state management such as `Bloc`, `Riverpod`, `Provider` and even the `setState`.
+- see full example [bloc example](example/lib/examples/bloc_example/screens/posts_list_view_screen.dart).
+
+```dart
+InfiniteListView.separated(
+  delegate: PaginationDelegate(
+    isLoading: state is PostsFetchLoading,
+    hasError: state is PostsFetchError,
+    hasReachedMax: context.read<PostsListCubit>().hasReachedMax,
+    // The number of remaining invisible items that should trigger a new fetch.
+    // The default value is 3.
+    invisibleItemsThreshold: 5,
+    itemCount: posts.length,
+    itemBuilder: (context, index) {
+    final post = posts[index];
+    return PostWidget(post: post);
+    },
+    // here we add a custom error screen if the state is an error state.
+    // and this screen will be shown if an error occurs while fetching data for the first page.
+    firstPageErrorBuilder: state is PostsFetchError
+      ? (context) =>
+      CustomErrorScreen(errorMessage: state.message)
+      : null,
+    // this method will be called when the user reaches the end of the list or for the first page.
+    onFetchData: () async {
+      await context.read<PostsListCubit>().fetchPosts();
+      },
+    ),
+    separatorBuilder: (context, index) => const Divider(),
+  )
+```
 
 ## Additional information
 
