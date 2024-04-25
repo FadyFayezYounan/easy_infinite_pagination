@@ -3,6 +3,8 @@
 A simple and customizable infinite pagination package for Flutter applications.
 The Easy Infinite Pagination package provides a simple and customizable way to implement infinite pagination in your Flutter applications. It supports both list and grid layouts in addition to Page view, and provides a variety of options to customize the appearance of the pagination indicators.
 
+<img width="300" src="https://raw.githubusercontent.com/FadyFayezYounan/easy_infinite_pagination/main/screenshots/easy_infinite_demo.gif"/>
+
 ## Features
 
 - **Easy to use**: Simply provide the package with a `PaginationDelegate` object, which contains all the necessary information for a paginated layout, such as the item count, item builder, loading indicator builder, error indicator builder, no more items indicator builder, loading state, error state, and more.
@@ -11,11 +13,11 @@ The Easy Infinite Pagination package provides a simple and customizable way to i
 
 - **Supports list view, grid view, and page view layouts**: The package can be used to create infinite lists, infinite grids, and infinite page views.
 
-- **Works with any state management**: The package is designed to work with any state management such as `Bloc`, `Riverpod`, `Provider` and even the `setState`. 
+- **Works with any state management**: The package is designed to work with any state management such as `Bloc`, `Riverpod`, `Provider` and even the `setState`.
 
 - **Efficient**: The package uses a number of optimizations to ensure that it is efficient, even for large datasets.
 
-- **Extensible**: The package can be extended to support custom pagination scenarios.
+- **Extensible**: The package can be extended to support custom pagination scenarios for example suppose that you want to add pagination for `flutter_staggered_grid_view` you can do that by wrapping your widget with `PaginationLayoutBuilder` see full example [custom pagination example](example/lib/examples/custom_example/infinite_masonry_grid_view.dart).  
 
 ## Getting started
 
