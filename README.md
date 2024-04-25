@@ -106,6 +106,25 @@ InfiniteListView(
   ),
   ```
 
+## Control when to fetch data
+
+- With `easy_infinite_pagination` you can control when to fetch data. by using the `invisibleItemsThreshold` parameter and `fetchDataOnStart` parameter.
+- `invisibleItemsThreshold` is used as a threshold to determine when to fetch more data default value is 3.
+- `fetchDataOnStart` is used to determine whether to fetch data on start or not default value is true.
+
+```dart
+InfiniteListView(
+  delegate: PaginationDelegate(
+    // The number of remaining invisible items that should trigger a new fetch.
+    // The default value is 3.
+    invisibleItemsThreshold: 5,
+    // If true, it will fetch data on start.
+    fetchDataOnStart: true,
+    ....
+    ),
+  )
+```
+
 ## How to use `easy_infinite_pagination` with Bloc
 
 - The `easy_infinite_pagination` package is designed to work with any state management such as `Bloc`, `Riverpod`, `Provider` and even the `setState`.
@@ -137,6 +156,45 @@ InfiniteListView.separated(
       },
     ),
     separatorBuilder: (context, index) => const Divider(),
+  )
+```
+
+## Support Custom Pagination Layouts
+
+- To create a new sliver layout, if `InfiniteListView`, `SliverInfiniteListView`, `InfiniteGridView`,`SliverInfiniteGridView`, and`InfinitePageView` do not meet your requirements, with `easy_infinite_pagination` you can make your own pagination layout.
+- For example suppose that you want to add pagination for `flutter_staggered_grid_view` you can do that by wrapping your widget with `PaginationLayoutBuilder`.
+- see full example [custom pagination example](example/lib/examples/custom_example/infinite_masonry_grid_view.dart).
+
+```dart
+return PaginationLayoutBuilder(
+  // Provider the layout strategy (box or sliver).
+  // In this case we used the box strategy.
+  // because the child not sliver widget.
+  layoutStrategy: LayoutStrategy.box,
+  delegate: paginationDelegate,
+  useShrinkWrapForFirstPageIndicators: _useShrinkWrapForFirstPageIndicators,
+  layoutChildBuilder: (
+    context,
+    itemBuilder,
+    itemCount,
+    bottomLoaderBuilder,
+    ) =>
+        MasonryGridView.custom(
+      gridDelegate: gridDelegate,
+      mainAxisSpacing: mainAxisSpacing,
+      crossAxisSpacing: crossAxisSpacing,
+      padding: padding,
+      // Here we create a predefined sliver delegate by the package
+      // this delegate is used to handle the bottom loader widget while loading, success and error state.
+      childrenDelegate: PaginationLayoutBuilder.createSliverChildDelegate(
+        builder: itemBuilder,
+        childCount: itemCount,
+        bottomLoaderBuilder: bottomLoaderBuilder,
+        addAutomaticKeepAlives: addAutomaticKeepAlives,
+        addRepaintBoundaries: addRepaintBoundaries,
+        addSemanticIndexes: addSemanticIndexes,
+      ),
+    ),
   )
 ```
 
