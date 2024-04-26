@@ -82,13 +82,12 @@ class _SimpleExampleState extends State<SimpleExample> {
 |ListView.builder | `InfiniteListView` |
 |ListView.separated | `InfiniteListView.separated` |
 |SliverList.builder | `SliverInfiniteListView` |
-|SliverFixedExtentList | `SliverInfiniteListView` just provide `itemExtent` parameter|
-|SliverPrototypeExtentList | `SliverInfiniteListView` just provide `prototypeItem` parameter |
 |SliverList.separated | `SliverInfiniteListView.separated` |
-|GridView | `InfiniteGridView` |
-|SliverGrid | `SliverInfiniteGridView` |
-|PageView | `InfinitePageView` |
-|Custom Pagination Layout | `PaginationLayoutBuilder` |
+|SliverFixedExtentList | `SliverInfiniteListView` (just provide `itemExtent` parameter)|
+|SliverPrototypeExtentList | `SliverInfiniteListView` (just provide `prototypeItem` parameter)|
+|GridView.builder | `InfiniteGridView` |
+|SliverGrid.builder | `SliverInfiniteGridView` |
+|PageView.builder | `InfinitePageView` |
 
 - `PaginationLayoutBuilder`: for custom pagination layouts scenarios
 
