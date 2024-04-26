@@ -128,12 +128,12 @@ final class PaginationDelegate {
   /// Returns the index of the last item in the pagination delegate's items.
   ///
   /// This is the effective count of items minus 1.
-  int get lastItemIndex => effectiveItemCount - 1;
+  int get lastItem => effectiveItemCount - 1;
 
   /// Returns the index at which data should be fetched.
   ///
   /// This is the index of the last item minus the invisible items threshold.
-  int get fetchAtIndex => lastItemIndex - invisibleItemsThreshold;
+  int get fetchAtIndex => lastItem - invisibleItemsThreshold;
 
   /// Returns the current status of the pagination delegate.
   ///

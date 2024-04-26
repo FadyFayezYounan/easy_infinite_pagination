@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -118,12 +116,7 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
   ///
   /// It's initialized in the [onLayoutComplete] method.
   late final Debouncer _debouncer;
-  /*
-  Debouncer is a utility class provided by the package. It's used to delay
-  execution of a function. This is useful in situations where the function
-  is called multiple times in a short period of time and we want to execute
-  the function only once after the delay has passed.
-  */
+
   /// [_lastItemIndex] represents the index of the last item in the data list.
   ///
   /// It's used to keep track of the last item index in the data list.
