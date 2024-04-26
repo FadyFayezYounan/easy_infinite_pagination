@@ -1,7 +1,6 @@
 import 'package:easy_infinite_pagination/easy_infinite_pagination.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubit/posts_grid_cubit/posts_grid_cubit.dart';

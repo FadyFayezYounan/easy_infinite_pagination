@@ -168,6 +168,42 @@ InfiniteListView.separated(
   )
 ```
 
+## Sliver Example
+
+- The package supports `sliver` layouts such as `SliverInfiniteListView`, `SliverInfiniteListView.separated` and `SliverInfiniteGridView`.
+- see full example [sliver grid view example](example/lib/examples/bloc_example/screens/posts_sliver_grid_view_screen.dart).
+
+```dart
+SliverPadding(
+  padding: const EdgeInsets.all(16.0),
+  sliver: SliverInfiniteGridView(
+    gridDelegate:
+      const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 10.0,
+    mainAxisSpacing: 10.0,
+  ),
+  delegate: PaginationDelegate(
+    isLoading: state.isLoading,
+    hasError: state.hasError,
+    hasReachedMax: state.hasReachedMax,
+    // The number of remaining invisible items that should trigger a new fetch.
+    // The default value is 3.
+    invisibleItemsThreshold: 5,
+    itemCount: state.posts.length,
+    itemBuilder: (context, index) {
+      final post = state.posts[index];
+      return PostGridWidget(post: post);
+    },
+    // this method will be called when the user reaches the end of the list or for the first page.
+    onFetchData: () async {
+      await context.read<PostsGridCubit>().fetchPosts();
+      },
+    ),
+  ),
+)
+```
+
 <a id="customLayout-example"></a>
 
 ## Support Custom Pagination Layouts

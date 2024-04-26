@@ -20,19 +20,12 @@ class CustomIndicatorsExample extends StatefulWidget {
 class _CustomIndicatorsExampleState extends State<CustomIndicatorsExample> {
   List<String> _items = [];
   bool _isLoading = true;
-  bool _hasError = false;
 
   void _fetchData() async {
     setState(() {
       _isLoading = true;
     });
     await Future.delayed(const Duration(seconds: 3));
-
-    // setState(() {
-    //   _isLoading = false;
-    //   _hasError = true;
-    // });
-    // throw Exception('Something went wrong!');
     setState(() {
       _isLoading = false;
       // Add 20 more items to the list. This could be a network request, a database query, etc.
