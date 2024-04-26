@@ -168,7 +168,7 @@ InfiniteListView.separated(
   )
 ```
 
-## Sliver Example
+## How to use `easy_infinite_pagination` with `Sliver`
 
 - The package supports `sliver` layouts such as `SliverInfiniteListView`, `SliverInfiniteListView.separated` and `SliverInfiniteGridView`.
 - see full example [sliver grid view example](example/lib/examples/bloc_example/screens/posts_sliver_grid_view_screen.dart).
@@ -202,6 +202,26 @@ SliverPadding(
     ),
   ),
 )
+```
+
+## How to use `easy_infinite_pagination` with `InfinitePageView`
+
+- The package supports `InfinitePageView`.
+- see full example [page view example](example/lib/examples/page_view_example/page_view_example_screen.dart).
+
+```dart
+InfinitePageView(
+  scrollDirection: Axis.vertical,
+  delegate: PaginationDelegate(
+  itemCount: _items.length,
+  itemBuilder: (_, index) => ListTile(
+    title: PageViewItem(index: index),
+  ),
+  isLoading: _isLoading,
+  invisibleItemsThreshold: 1,
+  onFetchData: _fetchData,
+ ),
+),
 ```
 
 <a id="customLayout-example"></a>
