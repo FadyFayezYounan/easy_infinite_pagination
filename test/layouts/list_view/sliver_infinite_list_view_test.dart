@@ -27,12 +27,12 @@ void main() {
         matching: find.byType(Scrollable),
       );
 
-      final lastItemInTheListToScroll = find.byWidgetPredicate(
+      final lastItemInTheListFinder = find.byWidgetPredicate(
           (widget) => widget is _ListItem && widget.data == 'Item 9');
 
       // Scroll through the list until the last EasyDayWidget is visible
       await tester.scrollUntilVisible(
-        lastItemInTheListToScroll,
+        lastItemInTheListFinder,
         _listItemHeight,
         scrollable: listViewFinder,
       );
