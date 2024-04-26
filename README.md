@@ -1,7 +1,7 @@
 # Easy Infinite Pagination
 
 A simple and customizable infinite pagination package for Flutter applications.
-The Easy Infinite Pagination package provides a simple and customizable way to implement infinite pagination in your Flutter applications. It supports both list and grid layouts in addition to Page view, and provides a variety of options to customize the appearance of the pagination indicators.
+The Easy Infinite Pagination package makes it easy to add infinite pagination to your apps. With just a few lines of code, you can create beautiful and efficient paginated lists, grids, and page views.
 
 <img width="300" src="https://raw.githubusercontent.com/FadyFayezYounan/easy_infinite_pagination/main/screenshots/easy_infinite_demo.gif"/>
 
