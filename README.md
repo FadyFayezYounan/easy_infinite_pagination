@@ -75,13 +75,21 @@ class _SimpleExampleState extends State<SimpleExample> {
 }
 ```
 
-## Available Widgets
+## Layouts Supported by `easy_infinite_pagination`
 
-- `InfiniteListView` and `InfiniteListView.separated`
-- `SliverInfiniteListView` and `SliverInfiniteListView.separated`
-- `InfiniteGridView`
-- `SliverInfiniteGridView`
-- `InfinitePageView`
+|Layout | Easy Infinite Pagination |
+|---------|--------|
+|ListView.builder | `InfiniteListView` |
+|ListView.separated | `InfiniteListView.separated` |
+|SliverList.builder | `SliverInfiniteListView` |
+|SliverFixedExtentList | `SliverInfiniteListView` just provide `itemExtent` parameter|
+|SliverPrototypeExtentList | `SliverInfiniteListView` just provide `prototypeItem` parameter |
+|SliverList.separated | `SliverInfiniteListView.separated` |
+|GridView | `InfiniteGridView` |
+|SliverGrid | `SliverInfiniteGridView` |
+|PageView | `InfinitePageView` |
+|Custom Pagination Layout | `PaginationLayoutBuilder` |
+
 - `PaginationLayoutBuilder`: for custom pagination layouts scenarios
 
 ## Customizable Indicators

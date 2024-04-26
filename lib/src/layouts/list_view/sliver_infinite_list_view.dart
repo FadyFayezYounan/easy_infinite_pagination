@@ -134,9 +134,10 @@ class SliverInfiniteListView extends StatelessWidget {
     );
 
     // Check if the item has a fixed extent or a prototype item.
-    final itemExtent = this.itemExtent;
-    if ((itemExtent == null && prototypeItem == null) ||
-        _separatorBuilder != null) {
+    final shouldReturnSliverList =
+        (itemExtent == null && prototypeItem == null) ||
+            _separatorBuilder != null;
+    if (shouldReturnSliverList) {
       // If not, return a sliver list widget.
       return SliverList(
         delegate: delegate,
@@ -144,7 +145,7 @@ class SliverInfiniteListView extends StatelessWidget {
     } else if (itemExtent != null) {
       // If it has a fixed extent, return a sliver fixed extent list widget.
       return SliverFixedExtentList(
-        itemExtent: itemExtent,
+        itemExtent: itemExtent!,
         delegate: delegate,
       );
     } else {
@@ -174,27 +175,25 @@ class SliverInfiniteListView extends StatelessWidget {
     WidgetBuilder? bottomLoaderBuilder,
   }) {
     // Check if a separator builder is provided. If not, use the regular delegate.
-    final separatorBuilder = _separatorBuilder;
-    return separatorBuilder == null
-        // Build the regular delegate.
-        ? PaginationLayoutBuilder.createSliverChildDelegate(
-            builder: itemBuilder,
-            childCount: itemCount,
-            bottomLoaderBuilder: bottomLoaderBuilder,
-            addAutomaticKeepAlives: addAutomaticKeepAlives,
-            addRepaintBoundaries: addRepaintBoundaries,
-            addSemanticIndexes: addSemanticIndexes,
-            semanticIndexCallback: semanticIndexCallback,
-          )
-        // Build the delegate with a separator builder.
-        : PaginationLayoutBuilder.createSeparatedSliverChildDelegate(
-            builder: itemBuilder,
-            childCount: itemCount,
-            bottomLoaderBuilder: bottomLoaderBuilder,
-            separatorBuilder: separatorBuilder,
-            addAutomaticKeepAlives: addAutomaticKeepAlives,
-            addRepaintBoundaries: addRepaintBoundaries,
-            addSemanticIndexes: addSemanticIndexes,
-          );
+    return switch (_separatorBuilder) {
+      null => PaginationLayoutBuilder.createSliverChildDelegate(
+          builder: itemBuilder,
+          childCount: itemCount,
+          bottomLoaderBuilder: bottomLoaderBuilder,
+          addAutomaticKeepAlives: addAutomaticKeepAlives,
+          addRepaintBoundaries: addRepaintBoundaries,
+          addSemanticIndexes: addSemanticIndexes,
+          semanticIndexCallback: semanticIndexCallback,
+        ),
+      _ => PaginationLayoutBuilder.createSeparatedSliverChildDelegate(
+          builder: itemBuilder,
+          childCount: itemCount,
+          bottomLoaderBuilder: bottomLoaderBuilder,
+          separatorBuilder: _separatorBuilder,
+          addAutomaticKeepAlives: addAutomaticKeepAlives,
+          addRepaintBoundaries: addRepaintBoundaries,
+          addSemanticIndexes: addSemanticIndexes,
+        ),
+    };
   }
 }
