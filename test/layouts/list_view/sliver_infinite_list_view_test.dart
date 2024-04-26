@@ -4,103 +4,201 @@ import 'package:flutter_test/flutter_test.dart';
 
 const _listItemHeight = 100.0;
 void main() {
-  group('SliverInfiniteListView', () {
-    testWidgets('renders correctly', (tester) async {
-      // Arrange
-      final delegate = PaginationDelegate(
-        itemBuilder: (context, index) => _ListItem(
-          data: 'Item $index',
-        ),
-        itemCount: 10,
-        onFetchData: () {},
-      );
-      // Act
-      await tester.pumpSliverWithFixedHeight(
-          SliverInfiniteListView(delegate: delegate));
+  group(
+    'SliverInfiniteListView',
+    () {
+      testWidgets('renders correctly', (tester) async {
+        // Arrange
+        const lastItemKey = ValueKey(9);
+        final delegate = PaginationDelegate(
+          itemBuilder: (context, index) => ListItem(
+            key: ValueKey(index),
+            data: 'Item $index',
+          ),
+          itemCount: 10,
+          onFetchData: () {},
+        );
+        // Act
+        await tester.pumpSliverWithFixedHeight(
+            SliverInfiniteListView(delegate: delegate));
 
-      // Assert
-      expect(find.text('Item 0'), findsOneWidget);
-      expect(find.text('Item 9'), findsNothing);
+        // Assert
+        expect(find.text('Item 0'), findsOneWidget);
+        expect(find.text('Item 9'), findsNothing);
 
-      final listViewFinder = find.descendant(
-        of: find.byType(CustomScrollView),
-        matching: find.byType(Scrollable),
-      );
+        // Scroll through the list until the last EasyDayWidget is visible
+        await tester.scrollUntilVisible(
+          find.byKey(lastItemKey),
+          _listItemHeight,
+        );
+        expect(find.text('Item 9'), findsOneWidget);
+      });
 
-      final lastItemInTheListFinder = find.byWidgetPredicate(
-          (widget) => widget is _ListItem && widget.data == 'Item 9');
+      testWidgets('renders separator correctly when hasReachedMax is true',
+          (tester) async {
+        // Arrange
+        final delegate = PaginationDelegate(
+          itemBuilder: (context, index) => Container(),
+          itemCount: 10,
+          hasReachedMax: true,
+          onFetchData: () {},
+        );
 
-      // Scroll through the list until the last EasyDayWidget is visible
-      await tester.scrollUntilVisible(
-        lastItemInTheListFinder,
-        _listItemHeight,
-        scrollable: listViewFinder,
-      );
-      expect(find.text('Item 9'), findsOneWidget);
-    });
+        // Act
+        await tester.pumpSliver(SliverInfiniteListView.separated(
+          delegate: delegate,
+          separatorBuilder: (context, index) => const Divider(),
+        ));
 
-    testWidgets('renders separator correctly when hasReachedMax is true',
+        expect(find.byType(Divider), findsAtLeast(9));
+      });
+      testWidgets('renders separator correctly when isLoading is true',
+          (tester) async {
+        // Arrange
+        final delegate = PaginationDelegate(
+          itemBuilder: (context, index) => Text('Item $index'),
+          itemCount: 10,
+          isLoading: true,
+          onFetchData: () {},
+        );
+
+        // Act
+        await tester.pumpSliverWithFixedHeight(SliverInfiniteListView.separated(
+          delegate: delegate,
+          separatorBuilder: (context, index) => const Divider(),
+        ));
+
+        // Assert
+        expect(find.byType(Divider), findsNWidgets(10));
+      });
+
+      testWidgets('renders separator correctly when hasError is true',
+          (tester) async {
+        // Arrange
+        final delegate = PaginationDelegate(
+          itemBuilder: (context, index) => Text('Item $index'),
+          itemCount: 10,
+          hasError: true,
+          onFetchData: () {},
+        );
+
+        // Act
+        await tester.pumpSliverWithFixedHeight(SliverInfiniteListView.separated(
+          delegate: delegate,
+          separatorBuilder: (context, index) => const Divider(),
+        ));
+
+        // Assert
+        expect(find.byType(Divider), findsNWidgets(10));
+      });
+
+      testWidgets(
+        'calls onFetchData in the initState and  when scrolled to the end',
         (tester) async {
-      // Arrange
-      final delegate = PaginationDelegate(
-        itemBuilder: (context, index) => Container(),
-        itemCount: 10,
-        hasReachedMax: true,
-        onFetchData: () {},
+          // Arrange
+          var onFetchDataCalledCount = 0;
+          final delegate = PaginationDelegate(
+            itemCount: 10,
+            invisibleItemsThreshold: 1,
+            itemBuilder: (context, index) => ListItem(
+              key: ValueKey(index),
+              data: 'Item $index',
+            ),
+            onFetchData: () {
+              onFetchDataCalledCount++;
+            },
+          );
+
+          // Act
+          await tester.pumpSliverWithFixedHeight(
+            SliverInfiniteListView(delegate: delegate),
+          );
+
+          // Assert
+          // the first call should in the initState
+          expect(onFetchDataCalledCount, equals(1));
+          await tester.scrollUntilVisible(
+            find.byKey(const ValueKey(9)),
+            100.0,
+          );
+          // the second call should in the pagination
+          expect(onFetchDataCalledCount, equals(2));
+        },
       );
 
-      // Act
-      await tester.pumpSliver(SliverInfiniteListView.separated(
-        delegate: delegate,
-        separatorBuilder: (context, index) => const Divider(),
-      ));
-
-      expect(find.byType(Divider), findsAtLeast(9));
-    });
-    testWidgets('renders separator correctly when isLoading is true',
+      testWidgets(
+        'calls onFetchData when scrolled to the invisibleItemsThreshold value',
         (tester) async {
-      // Arrange
-      final delegate = PaginationDelegate(
-        itemBuilder: (context, index) => Text('Item $index'),
-        itemCount: 10,
-        isLoading: true,
-        onFetchData: () {},
+          // Arrange
+          const itemCount = 20;
+          const invisibleItemsThreshold = 5;
+          const shouldFetchAtIndex = (itemCount - invisibleItemsThreshold) - 1;
+          var onFetchDataCalledCount = 0;
+          final delegate = PaginationDelegate(
+            itemCount: itemCount,
+            invisibleItemsThreshold: invisibleItemsThreshold,
+            itemBuilder: (context, index) => ListItem(
+              key: ValueKey(index),
+              data: 'Item $index',
+            ),
+            onFetchData: () {
+              onFetchDataCalledCount++;
+            },
+          );
+
+          // Act
+          await tester.pumpSliverWithFixedHeight(
+            SliverInfiniteListView(delegate: delegate),
+          );
+
+          // Assert
+          // the first call should in the initState
+          expect(onFetchDataCalledCount, equals(1));
+
+          await tester.scrollUntilVisible(
+            find.byKey(const ValueKey(shouldFetchAtIndex)),
+            _listItemHeight,
+          );
+          // the second call should in the pagination
+          expect(onFetchDataCalledCount, equals(2));
+        },
       );
-
-      // Act
-      await tester.pumpSliverWithFixedHeight(SliverInfiniteListView.separated(
-        delegate: delegate,
-        separatorBuilder: (context, index) => const Divider(),
-      ));
-
-      // Assert
-      expect(find.byType(Divider), findsNWidgets(10));
-    });
-
-    testWidgets('renders separator correctly when hasError is true',
+      testWidgets(
+        'calls onFetchData immediately if the first page is not enough',
         (tester) async {
-      // Arrange
-      final delegate = PaginationDelegate(
-        itemBuilder: (context, index) => Text('Item $index'),
-        itemCount: 10,
-        hasError: true,
-        onFetchData: () {},
+          // Arrange
+          var onFetchDataCalledCount = 0;
+          final delegate = PaginationDelegate(
+            itemCount: 2,
+            invisibleItemsThreshold: 1,
+            isLoading: true,
+            itemBuilder: (context, index) => ListItem(
+              key: ValueKey(index),
+              data: 'Item $index',
+            ),
+            onFetchData: () {
+              onFetchDataCalledCount++;
+            },
+          );
+
+          // Act
+          await tester.pumpSliverWithFixedHeight(
+            SliverInfiniteListView(delegate: delegate),
+          );
+
+          // Assert
+          expect(onFetchDataCalledCount, equals(1));
+        },
       );
-
-      // Act
-      await tester.pumpSliverWithFixedHeight(SliverInfiniteListView.separated(
-        delegate: delegate,
-        separatorBuilder: (context, index) => const Divider(),
-      ));
-
-      // Assert
-      expect(find.byType(Divider), findsNWidgets(10));
-    });
-  });
+    },
+  );
 }
 
-class _ListItem extends StatelessWidget {
-  const _ListItem({required this.data});
+class ListItem extends StatelessWidget {
+  const ListItem({
+    super.key,
+    required this.data,
+  });
   final String data;
 
   @override
