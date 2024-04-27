@@ -231,6 +231,10 @@ InfinitePageView(
 ),
 ```
 
+## Support Searching, Sorting and Filtering with `easy_infinite_pagination`
+
+- Absolutely you can use `easy_infinite_pagination` package to support searching, sorting and filtering. The optimal approach depends on your state management.
+
 <a id="customLayout-example"></a>
 
 ## Support Custom Pagination Layouts

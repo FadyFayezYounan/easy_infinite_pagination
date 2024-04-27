@@ -37,7 +37,7 @@ class InfiniteListView extends BoxScrollView {
           itemExtent == null || prototypeItem == null,
           'You can only pass itemExtent or prototypeItem, not both',
         ),
-        _useShrinkWrapForFirstPageIndicators = shrinkWrap,
+        _enableShrinkWrapForFirstPageIndicators = shrinkWrap,
         _separatorBuilder = null;
   const InfiniteListView.separated({
     super.key,
@@ -64,7 +64,7 @@ class InfiniteListView extends BoxScrollView {
           itemExtent == null || prototypeItem == null,
           'Only one of itemExtent or prototypeItem can be used, not both',
         ),
-        _useShrinkWrapForFirstPageIndicators = shrinkWrap,
+        _enableShrinkWrapForFirstPageIndicators = shrinkWrap,
         _separatorBuilder = separatorBuilder;
 
   /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
@@ -114,31 +114,31 @@ class InfiniteListView extends BoxScrollView {
   final Widget? prototypeItem;
 
   /// Whether to use shrink wrap for first page indicators.
-  final bool _useShrinkWrapForFirstPageIndicators;
+  final bool _enableShrinkWrapForFirstPageIndicators;
 
   @override
   Widget buildChildLayout(BuildContext context) {
-    final hasSeparatorBuilder = _separatorBuilder != null;
-    if (hasSeparatorBuilder) {
-      return SliverInfiniteListView.separated(
-        delegate: delegate,
-        separatorBuilder: _separatorBuilder,
-        addAutomaticKeepAlives: addAutomaticKeepAlives,
-        addRepaintBoundaries: addRepaintBoundaries,
-        addSemanticIndexes: addSemanticIndexes,
-        itemExtent: itemExtent,
-        useShrinkWrapForFirstPageIndicators:
-            _useShrinkWrapForFirstPageIndicators,
-      );
-    }
-    return SliverInfiniteListView(
-      delegate: delegate,
-      addAutomaticKeepAlives: addAutomaticKeepAlives,
-      addRepaintBoundaries: addRepaintBoundaries,
-      addSemanticIndexes: addSemanticIndexes,
-      itemExtent: itemExtent,
-      prototypeItem: prototypeItem,
-      useShrinkWrapForFirstPageIndicators: _useShrinkWrapForFirstPageIndicators,
-    );
+    return switch (_separatorBuilder) {
+      null => SliverInfiniteListView(
+          delegate: delegate,
+          addAutomaticKeepAlives: addAutomaticKeepAlives,
+          addRepaintBoundaries: addRepaintBoundaries,
+          addSemanticIndexes: addSemanticIndexes,
+          itemExtent: itemExtent,
+          prototypeItem: prototypeItem,
+          enableShrinkWrapForFirstPageIndicators:
+              _enableShrinkWrapForFirstPageIndicators,
+        ),
+      _ => SliverInfiniteListView.separated(
+          delegate: delegate,
+          separatorBuilder: _separatorBuilder,
+          addAutomaticKeepAlives: addAutomaticKeepAlives,
+          addRepaintBoundaries: addRepaintBoundaries,
+          addSemanticIndexes: addSemanticIndexes,
+          itemExtent: itemExtent,
+          enableShrinkWrapForFirstPageIndicators:
+              _enableShrinkWrapForFirstPageIndicators,
+        ),
+    };
   }
 }

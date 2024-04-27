@@ -16,7 +16,7 @@ class PaginationLayoutBuilder extends StatefulWidget {
   /// layout.
   /// [delegate] provides the pagination delegate which contains necessary information for pagination logic.
   /// [layoutChildBuilder] parameter builds the child widgets of the scrollable widget.
-  /// [useShrinkWrapForFirstPageIndicators] determines whether to use shrink wrap for first page indicators.
+  /// [enableShrinkWrapForFirstPageIndicators] determines whether to use shrink wrap for first page indicators.
   ///
   /// Example:
   /// ```dart
@@ -24,9 +24,12 @@ class PaginationLayoutBuilder extends StatefulWidget {
   /// layoutStrategy: LayoutStrategy.sliver,
   /// delegate: PaginationDelegate(...),
   ///   layoutChildBuilder: (context, itemBuilder, itemCount, bottomLoaderBuilder) {
-  ///     return SliverList.builder(
-  ///       itemBuilder: itemBuilder,
-  ///       itemCount: itemCount,
+  ///     return SliverList(
+  ///       delegate: PaginationLayoutBuilder.createSliverChildDelegate(
+  ///          builder: itemBuilder,
+  ///          childCount: itemCount,
+  ///          bottomLoaderBuilder: bottomLoaderBuilder,
+  ///       ),
   ///     );
   ///   },
   /// )
@@ -36,7 +39,7 @@ class PaginationLayoutBuilder extends StatefulWidget {
     required this.layoutStrategy,
     required this.delegate,
     required this.layoutChildBuilder,
-    this.useShrinkWrapForFirstPageIndicators = false,
+    this.enableShrinkWrapForFirstPageIndicators = false,
   });
 
   /// The layout strategy used to build the layout (sliver or box).
@@ -49,7 +52,7 @@ class PaginationLayoutBuilder extends StatefulWidget {
   final LayoutChildBuilder layoutChildBuilder;
 
   /// Whether to use shrink wrap for first page indicators.
-  final bool useShrinkWrapForFirstPageIndicators;
+  final bool enableShrinkWrapForFirstPageIndicators;
 
   /// Creates a new [AppendedBottomLoaderSliverChildBuilderDelegate] with the provided parameters.
   ///
@@ -133,8 +136,8 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
   LayoutStrategy get _layoutStrategy => widget.layoutStrategy;
 
   /// Getter methods for easier access to shrink wrap value.
-  bool get _useShrinkWrapForFirstPageIndicators =>
-      widget.useShrinkWrapForFirstPageIndicators;
+  bool get _enableShrinkWrapForFirstPageIndicators =>
+      widget.enableShrinkWrapForFirstPageIndicators;
 
   /// [_firstPageLoadingBuilder] is a getter method that returns a builder
   /// function for the first page loading indicator.
@@ -245,17 +248,20 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
       PaginationStatus.firstPageLoading => FirstPageIndicatorWidgetBuilder(
           builder: _firstPageLoadingBuilder,
           layoutStrategy: _layoutStrategy,
-          useForFirstPageIndicators: _useShrinkWrapForFirstPageIndicators,
+          enableShrinkWrapForFirstPageIndicators:
+              _enableShrinkWrapForFirstPageIndicators,
         ),
       PaginationStatus.firstPageError => FirstPageIndicatorWidgetBuilder(
           builder: _firstPageErrorBuilder,
           layoutStrategy: _layoutStrategy,
-          useForFirstPageIndicators: _useShrinkWrapForFirstPageIndicators,
+          enableShrinkWrapForFirstPageIndicators:
+              _enableShrinkWrapForFirstPageIndicators,
         ),
       PaginationStatus.firstPageNoItemsFound => FirstPageIndicatorWidgetBuilder(
           builder: _firstPageNoItemsBuilder,
           layoutStrategy: _layoutStrategy,
-          useForFirstPageIndicators: _useShrinkWrapForFirstPageIndicators,
+          enableShrinkWrapForFirstPageIndicators:
+              _enableShrinkWrapForFirstPageIndicators,
         ),
       PaginationStatus.loadMoreReachedLastPage => widget.layoutChildBuilder(
           context,

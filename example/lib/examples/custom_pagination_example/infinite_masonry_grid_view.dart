@@ -163,7 +163,8 @@ class InfiniteMasonryGridView extends StatelessWidget {
       // because the child not sliver widget.
       layoutStrategy: LayoutStrategy.box,
       delegate: paginationDelegate,
-      useShrinkWrapForFirstPageIndicators: _useShrinkWrapForFirstPageIndicators,
+      enableShrinkWrapForFirstPageIndicators:
+          _useShrinkWrapForFirstPageIndicators,
       layoutChildBuilder: (
         context,
         itemBuilder,

@@ -22,7 +22,7 @@ class SliverInfiniteListView extends StatelessWidget {
     this.semanticIndexCallback,
     this.itemExtent,
     this.prototypeItem,
-    this.useShrinkWrapForFirstPageIndicators = false,
+    this.enableShrinkWrapForFirstPageIndicators = false,
   })  : assert(
           itemExtent == null || prototypeItem == null,
           'You can only pass itemExtent or prototypeItem, not both',
@@ -38,7 +38,7 @@ class SliverInfiniteListView extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.semanticIndexCallback,
     this.itemExtent,
-    this.useShrinkWrapForFirstPageIndicators = false,
+    this.enableShrinkWrapForFirstPageIndicators = false,
   })  : prototypeItem = null,
         _separatorBuilder = separatorBuilder;
 
@@ -93,7 +93,7 @@ class SliverInfiniteListView extends StatelessWidget {
   final Widget? prototypeItem;
 
   /// Whether to use shrink wrap for first page indicators or not.
-  final bool useShrinkWrapForFirstPageIndicators;
+  final bool enableShrinkWrapForFirstPageIndicators;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +101,8 @@ class SliverInfiniteListView extends StatelessWidget {
       layoutStrategy: LayoutStrategy.sliver,
       delegate: delegate,
       layoutChildBuilder: _buildSliverList,
-      useShrinkWrapForFirstPageIndicators: useShrinkWrapForFirstPageIndicators,
+      enableShrinkWrapForFirstPageIndicators:
+          enableShrinkWrapForFirstPageIndicators,
     );
   }
 
@@ -134,10 +135,9 @@ class SliverInfiniteListView extends StatelessWidget {
     );
 
     // Check if the item has a fixed extent or a prototype item.
-    final shouldReturnSliverList =
-        (itemExtent == null && prototypeItem == null) ||
-            _separatorBuilder != null;
-    if (shouldReturnSliverList) {
+    final isNormalSliverList = (itemExtent == null && prototypeItem == null) ||
+        _separatorBuilder != null;
+    if (isNormalSliverList) {
       // If not, return a sliver list widget.
       return SliverList(
         delegate: delegate,

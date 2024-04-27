@@ -10,15 +10,15 @@ class FirstPageIndicatorWidgetBuilder extends StatelessWidget {
   const FirstPageIndicatorWidgetBuilder({
     super.key,
     required this.builder,
-    required this.useForFirstPageIndicators,
+    required this.enableShrinkWrapForFirstPageIndicators,
     required this.layoutStrategy,
   });
 
   /// A builder function that is used to build the widget.
   final WidgetBuilder builder;
 
-  /// Specifies whether the widget should be used for first page indicators.
-  final bool useForFirstPageIndicators;
+  /// Whether to use shrink wrap for first page indicators or not.
+  final bool enableShrinkWrapForFirstPageIndicators;
 
   /// Specifies the layout strategy.
   final LayoutStrategy layoutStrategy;
@@ -32,10 +32,10 @@ class FirstPageIndicatorWidgetBuilder extends StatelessWidget {
     };
   }
 
-  /// Builds a SliverToBoxAdapter widget or a SliverFillRemaining widget based on the [useForFirstPageIndicators] parameter.
+  /// Builds a SliverToBoxAdapter widget or a SliverFillRemaining widget based on the [enableShrinkWrapForFirstPageIndicators] parameter.
   Widget _buildSliverBuilder(BuildContext context) {
     // If the widget should be used for first page indicators, build a SliverToBoxAdapter widget.
-    if (useForFirstPageIndicators) {
+    if (enableShrinkWrapForFirstPageIndicators) {
       return SliverToBoxAdapter(
         child: builder(context),
       );
@@ -49,10 +49,10 @@ class FirstPageIndicatorWidgetBuilder extends StatelessWidget {
     }
   }
 
-  /// Builds a Center widget or the provided widget based on the [useForFirstPageIndicators] parameter.
+  /// Builds a Center widget or the provided widget based on the [enableShrinkWrapForFirstPageIndicators] parameter.
   Widget _buildBoxBuilder(BuildContext context) {
     // If the widget should be used for first page indicators, build the provided widget.
-    if (useForFirstPageIndicators) {
+    if (enableShrinkWrapForFirstPageIndicators) {
       return builder(context);
     }
     // If the widget should not be used for first page indicators, build a Center widget.

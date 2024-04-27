@@ -37,7 +37,7 @@ class InfiniteGridView extends BoxScrollView {
     this.addSemanticIndexes = true,
     required this.gridDelegate,
     required this.delegate,
-  });
+  }) : _enableShrinkWrapForFirstPageIndicators = shrinkWrap;
 
   /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
   /// the item count, item builder, loading indicator builder, error indicator
@@ -61,11 +61,16 @@ class InfiniteGridView extends BoxScrollView {
   /// [SliverChildBuilderDelegate.addSemanticIndexes] property.
   final bool addSemanticIndexes;
 
+  /// Whether to use shrink wrap for first page indicators.
+  final bool _enableShrinkWrapForFirstPageIndicators;
+
   @override
   Widget buildChildLayout(BuildContext context) {
     return SliverInfiniteGridView(
       delegate: delegate,
       gridDelegate: gridDelegate,
+      enableShrinkWrapForFirstPageIndicators:
+          _enableShrinkWrapForFirstPageIndicators,
       addAutomaticKeepAlives: addAutomaticKeepAlives,
       addRepaintBoundaries: addRepaintBoundaries,
       addSemanticIndexes: addSemanticIndexes,

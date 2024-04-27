@@ -1,3 +1,4 @@
+import 'package:example/examples/page_view_example/page_view_item.dart';
 import 'package:flutter/material.dart';
 
 import 'examples/examples.dart';
@@ -58,15 +59,26 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onDestinationSelected,
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.abc), label: "Simple"),
           NavigationDestination(
-              icon: Icon(Icons.list_alt_rounded), label: "ListView"),
+            icon: Icon(Icons.abc),
+            label: "Simple",
+          ),
           NavigationDestination(
-              icon: Icon(Icons.auto_stories_rounded), label: "PageView"),
+            icon: Icon(Icons.list_alt_rounded),
+            label: "ListView",
+          ),
           NavigationDestination(
-              icon: Icon(Icons.apps_rounded), label: "GridView"),
+            icon: Icon(Icons.auto_stories_rounded),
+            label: "PageView",
+          ),
           NavigationDestination(
-              icon: Icon(Icons.dashboard_customize_rounded), label: "Custom"),
+            icon: Icon(Icons.apps_rounded),
+            label: "GridView",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.dashboard_customize_rounded),
+            label: "Custom",
+          ),
         ],
       ),
     );

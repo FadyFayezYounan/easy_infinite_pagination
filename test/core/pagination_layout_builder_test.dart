@@ -412,7 +412,7 @@ extension on WidgetTester {
       PaginationLayoutBuilder(
         delegate: delegate,
         layoutStrategy: LayoutStrategy.sliver,
-        useShrinkWrapForFirstPageIndicators:
+        enableShrinkWrapForFirstPageIndicators:
             useShrinkWrapForFirstPageIndicators,
         layoutChildBuilder: (
           context,

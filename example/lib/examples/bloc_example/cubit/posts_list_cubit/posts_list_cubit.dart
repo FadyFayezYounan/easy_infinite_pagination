@@ -20,7 +20,6 @@ class PostsListCubit extends Cubit<PostsListState> {
   bool _hasReachedMax = false;
 
   /// Current page number.
-  int get page => _page;
   int _page = 1;
 
   /// Refreshes the list of posts by clearing the current list, resetting

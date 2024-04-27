@@ -28,7 +28,7 @@ class InfinitePageView extends StatelessWidget {
     this.onPageChanged,
     this.pageSnapping = true,
     this.padEnds = true,
-    this.shrinkWrapFirstPageIndicators = false,
+    this.enableShrinkWrapForFirstPageIndicators = false,
     required this.delegate,
   });
 
@@ -161,14 +161,16 @@ class InfinitePageView extends StatelessWidget {
   /// The `padEnds` argument corresponds to the [PageView.padEnds] property.
   final bool padEnds;
 
-  /// Whether to shrink wrap the first page indicators
-  final bool shrinkWrapFirstPageIndicators;
+  /// Whether to shrink wrap the first page indicators or not.
+  final bool enableShrinkWrapForFirstPageIndicators;
 
   @override
   Widget build(BuildContext context) {
     return PaginationLayoutBuilder(
       layoutStrategy: LayoutStrategy.box,
       delegate: delegate,
+      enableShrinkWrapForFirstPageIndicators:
+          enableShrinkWrapForFirstPageIndicators,
       layoutChildBuilder: _buildPageView,
     );
   }

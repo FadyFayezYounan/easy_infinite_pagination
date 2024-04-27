@@ -35,9 +35,7 @@ class _PageViewExampleScreenState extends State<PageViewExampleScreen> {
         scrollDirection: Axis.vertical,
         delegate: PaginationDelegate(
           itemCount: _items.length,
-          itemBuilder: (_, index) => ListTile(
-            title: PageViewItem(index: index),
-          ),
+          itemBuilder: (_, index) => PageViewItem(index: index),
           isLoading: _isLoading,
           invisibleItemsThreshold: 1,
           onFetchData: _fetchData,

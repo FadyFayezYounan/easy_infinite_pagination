@@ -21,6 +21,7 @@ class SliverInfiniteGridView extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+    this.enableShrinkWrapForFirstPageIndicators = false,
   });
 
   /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
@@ -45,11 +46,16 @@ class SliverInfiniteGridView extends StatelessWidget {
   /// [SliverChildBuilderDelegate.addSemanticIndexes] property.
   final bool addSemanticIndexes;
 
+  /// Whether to use shrink wrap for first page indicators or not.
+  final bool enableShrinkWrapForFirstPageIndicators;
+
   @override
   Widget build(BuildContext context) {
     return PaginationLayoutBuilder(
       layoutStrategy: LayoutStrategy.sliver,
       delegate: delegate,
+      enableShrinkWrapForFirstPageIndicators:
+          enableShrinkWrapForFirstPageIndicators,
       layoutChildBuilder: _buildSliverGrid,
     );
   }

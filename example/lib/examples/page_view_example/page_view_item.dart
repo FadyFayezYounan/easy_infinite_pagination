@@ -8,11 +8,15 @@ class PageViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Card(
-        child: Center(
-          child: CircleAvatar(
-            radius: 48.0,
-            child: Text("Page ${index + 1}"),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Card(
+          child: Center(
+            child: CircleAvatar(
+              radius: 48.0,
+              child: Text("Page ${index + 1}"),
+            ),
           ),
         ),
       ),
