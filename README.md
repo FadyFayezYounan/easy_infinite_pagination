@@ -1,5 +1,10 @@
 # Easy Infinite Pagination
 
+<a href="https://pub.dev/packages/easy_infinite_pagination"><img src="https://img.shields.io/pub/v/easy_infinite_pagination.svg" alt="Pub"></a>
+<a href="https://pub.dev/packages/easy_infinite_pagination/score"><img src="https://img.shields.io/pub/likes/easy_infinite_pagination?logo=flutter" alt="Pub likes"></a>
+<a href="https://pub.dev/packages/easy_infinite_pagination/score"><img src="https://img.shields.io/pub/popularity/easy_infinite_pagination?logo=flutter" alt="Pub popularity"></a>
+<a href="https://pub.dev/packages/easy_infinite_pagination/score"><img src="https://img.shields.io/pub/points/easy_infinite_pagination?logo=flutter" alt="Pub points"></a>
+
 A simple and customizable infinite pagination package for Flutter applications.
 The Easy Infinite Pagination package makes it easy to add infinite pagination to your apps. With just a few lines of code, you can create beautiful and efficient paginated lists, grids, and page views.
 
@@ -79,15 +84,15 @@ class _SimpleExampleState extends State<SimpleExample> {
 
 |Layout | Easy Infinite Pagination |
 |---------|--------|
-|ListView.builder | `InfiniteListView` |
-|ListView.separated | `InfiniteListView.separated` |
-|SliverList.builder | `SliverInfiniteListView` |
-|SliverList.separated | `SliverInfiniteListView.separated` |
-|SliverFixedExtentList | `SliverInfiniteListView` (just provide `itemExtent` parameter)|
-|SliverPrototypeExtentList | `SliverInfiniteListView` (just provide `prototypeItem` parameter)|
-|GridView.builder | `InfiniteGridView` |
-|SliverGrid.builder | `SliverInfiniteGridView` |
-|PageView.builder | `InfinitePageView` |
+|ListView.builder | [`InfiniteListView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/InfiniteListView-class.html) |
+|ListView.separated | [`InfiniteListView.separated`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/InfiniteListView-class.html) |
+|SliverList.builder | [`SliverInfiniteListView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/SliverInfiniteListView-class.html) |
+|SliverList.separated | [`SliverInfiniteListView.separated`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/SliverInfiniteListView-class.html) |
+|SliverFixedExtentList | [`SliverInfiniteListView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/SliverInfiniteListView-class.html) (just provide `itemExtent` parameter)|
+|SliverPrototypeExtentList | [`SliverInfiniteListView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/SliverInfiniteListView-class.html) (just provide `prototypeItem` parameter)|
+|GridView.builder | [`InfiniteGridView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/InfiniteGridView-class.html) |
+|SliverGrid.builder | [`SliverInfiniteGridView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/SliverInfiniteGridView-class.html) |
+|PageView.builder | [`InfinitePageView`](https://pub.dev/documentation/easy_infinite_pagination/latest/easy_infinite_pagination/InfinitePageView-class.html) |
 
 - `PaginationLayoutBuilder`: for custom pagination layouts scenarios
 
@@ -211,7 +216,7 @@ SliverPadding(
 )
 ```
 
-## How to use `easy_infinite_pagination` with `InfinitePageView`
+## How to use `InfinitePageView`
 
 - The package supports `InfinitePageView`.
 - see full example [page view example](example/lib/examples/page_view_example/page_view_example_screen.dart).
