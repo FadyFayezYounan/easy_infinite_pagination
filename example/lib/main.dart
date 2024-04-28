@@ -1,4 +1,3 @@
-import 'package:example/examples/page_view_example/page_view_item.dart';
 import 'package:flutter/material.dart';
 
 import 'examples/examples.dart';

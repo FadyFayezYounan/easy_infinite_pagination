@@ -157,18 +157,14 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
   /// If it's null, it falls back to the [firstPageErrorBuilder] function.
   ///
   /// The [firstPageErrorBuilder] function is responsible for building the
-  /// widget that represents the first page error indicator.
+  /// widget that represents the first page error indicator. It receives
+  /// a [BuildContext] and a [VoidCallback] as parameters. The [VoidCallback] is
+  /// a function to be called when the user taps the widget, typically to
+  /// retry the operation.
   ///
-  /// The [firstPageErrorBuilder] function takes a single argument, which is a
-  /// function. This function can be called to trigger the re-attempt of fetching
-  /// data.
-  ///
-  /// The [_delegate.onFetchData] function is passed as an argument to the
-  /// [firstPageErrorBuilder] function so that it can be called when the user
-  /// wants to re-attempt fetching data.
-  WidgetBuilder get _firstPageErrorBuilder =>
-      _delegate.firstPageErrorBuilder ??
-      (_) => firstPageErrorBuilder(context, _delegate.onFetchData);
+  /// This function is used when there is an error in the first page.
+  ErrorWidgetBuilderCallback get _firstPageErrorBuilder =>
+      _delegate.firstPageErrorBuilder ?? firstPageErrorBuilder;
 
   /// [_firstPageNoItemsBuilder] is a getter method that returns a builder
   /// function for the first page no items found indicator.
@@ -201,19 +197,13 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
   /// If it's null, it falls back to the [loadMoreErrorBuilder] function.
   ///
   /// The [loadMoreErrorBuilder] function is responsible for building the
-  /// widget that represents the load more error indicator. It is
-  /// used when there was an error while fetching more data.
-  ///
-  /// The [loadMoreErrorBuilder] function takes a single argument, which is a
-  /// function. This function can be called to trigger the re-attempt of fetching
-  /// more data.
-  ///
-  /// The [_delegate.onFetchData] function is passed as an argument to the
-  /// [loadMoreErrorBuilder] function so that it can be called when the user
-  /// wants to re-attempt fetching more data.
-  WidgetBuilder get _loadMoreErrorBuilder =>
-      _delegate.loadMoreErrorBuilder ??
-      (_) => loadMoreErrorBuilder(context, _delegate.onFetchData);
+  /// widget that represents the load more error indicator. It is used
+  /// when there is an error in fetching more data. It receives a [BuildContext]
+  /// and a [VoidCallback] as parameters. The [VoidCallback] is a function
+  /// to be called when the user taps the widget, typically to retry the
+  /// operation.
+  ErrorWidgetBuilderCallback get _loadMoreErrorBuilder =>
+      _delegate.loadMoreErrorBuilder ?? loadMoreErrorBuilder;
 
   /// [_loadMoreNoMoreItemsBuilder] is a getter method that returns a builder
   /// function for the load more no more items indicator.
@@ -252,7 +242,8 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
               _enableShrinkWrapForFirstPageIndicators,
         ),
       PaginationStatus.firstPageError => FirstPageIndicatorWidgetBuilder(
-          builder: _firstPageErrorBuilder,
+          builder: (context) =>
+              _firstPageErrorBuilder(context, _delegate.onFetchData),
           layoutStrategy: _layoutStrategy,
           enableShrinkWrapForFirstPageIndicators:
               _enableShrinkWrapForFirstPageIndicators,
@@ -279,7 +270,7 @@ class _PaginationLayoutBuilderState extends State<PaginationLayoutBuilder>
           context,
           _buildItemBuilder,
           _delegate.itemCount,
-          _loadMoreErrorBuilder,
+          (context) => _loadMoreErrorBuilder(context, _delegate.onFetchData),
         ),
     };
   }

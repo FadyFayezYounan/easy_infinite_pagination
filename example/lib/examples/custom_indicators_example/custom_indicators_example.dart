@@ -49,14 +49,14 @@ class _CustomIndicatorsExampleState extends State<CustomIndicatorsExample> {
           onFetchData: _fetchData,
           firstPageLoadingBuilder: (context) =>
               const FirstPageLoadingIndicator(),
-          firstPageErrorBuilder: (context) => FirstPageErrorIndicator(
-            onRetry: _fetchData,
+          firstPageErrorBuilder: (context, onRetry) => FirstPageErrorIndicator(
+            onRetry: onRetry,
           ),
           firstPageNoItemsBuilder: (context) =>
               const FirstPageNoItemsFoundedIndicator(),
           loadMoreLoadingBuilder: (context) => const LoadMoreLoadingIndicator(),
-          loadMoreErrorBuilder: (context) => LoadMoreErrorIndicator(
-            onRetry: _fetchData,
+          loadMoreErrorBuilder: (context, onRetry) => LoadMoreErrorIndicator(
+            onRetry: onRetry,
           ),
           loadMoreNoMoreItemsBuilder: (context) =>
               const LoadMoreNoMoreItemsIndicator(),

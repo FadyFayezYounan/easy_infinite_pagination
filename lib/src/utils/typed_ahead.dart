@@ -1,4 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Widget,
+        BuildContext,
+        IndexedWidgetBuilder,
+        WidgetBuilder,
+        VoidCallback;
 
 /// A function type that takes in several parameters and returns a [Widget].
 ///
@@ -22,4 +28,16 @@ typedef LayoutChildBuilder = Widget Function(
   /// An optional widget builder for a widget at the end of the layout.
   /// This is often used to indicate that there are more items to load or that an error occurred.
   WidgetBuilder? bottomLoaderBuilder,
+);
+
+/// The [ErrorWidgetBuilderCallback] is a function that builds a widget
+/// that represents an error. The function takes in the current build context,
+/// and a [VoidCallback] that should be called when the user wants to retry
+/// the operation.
+typedef ErrorWidgetBuilderCallback = Widget Function(
+  BuildContext context,
+
+  /// A callback that will be called when the user wants to retry
+  /// the operation that resulted in the error.
+  VoidCallback onRetry,
 );

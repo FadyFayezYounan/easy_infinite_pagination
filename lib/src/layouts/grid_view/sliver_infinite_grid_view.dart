@@ -24,6 +24,16 @@ class SliverInfiniteGridView extends StatelessWidget {
     this.enableShrinkWrapForFirstPageIndicators = false,
   });
 
+  const SliverInfiniteGridView.count({
+    super.key,
+    required this.delegate,
+    required this.gridDelegate,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.enableShrinkWrapForFirstPageIndicators = false,
+  });
+
   /// The `PaginationDelegate` contains all the necessary information for a paginated layout, such as
   /// the item count, item builder, loading indicator builder, error indicator
   /// builder, no more items indicator builder, loading state, error state,

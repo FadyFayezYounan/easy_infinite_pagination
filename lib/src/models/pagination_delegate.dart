@@ -39,7 +39,7 @@ final class PaginationDelegate {
   final WidgetBuilder? loadMoreLoadingBuilder;
 
   /// A builder function that builds an error indicator widget.
-  final WidgetBuilder? loadMoreErrorBuilder;
+  final ErrorWidgetBuilderCallback? loadMoreErrorBuilder;
 
   /// A builder function that builds a no more items indicator widget.
   final WidgetBuilder? loadMoreNoMoreItemsBuilder;
@@ -48,7 +48,7 @@ final class PaginationDelegate {
   final WidgetBuilder? firstPageLoadingBuilder;
 
   /// A builder function that builds an error indicator widget for the first page.
-  final WidgetBuilder? firstPageErrorBuilder;
+  final ErrorWidgetBuilderCallback? firstPageErrorBuilder;
 
   /// A builder function that builds a no items found indicator widget for the first page.
   final WidgetBuilder? firstPageNoItemsBuilder;

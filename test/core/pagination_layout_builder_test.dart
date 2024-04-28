@@ -104,7 +104,8 @@ void main() {
               final delegate = PaginationDelegate(
                 itemCount: 0,
                 hasError: true,
-                firstPageErrorBuilder: (context) => Container(key: errorKey),
+                firstPageErrorBuilder: (context, onRetry) =>
+                    Container(key: errorKey),
                 itemBuilder: (context, index) => Container(),
                 onFetchData: () {},
               );
@@ -314,7 +315,7 @@ void main() {
               final delegate = PaginationDelegate(
                 itemCount: 5,
                 hasError: true,
-                loadMoreErrorBuilder: (context) =>
+                loadMoreErrorBuilder: (context, onRetry) =>
                     Container(key: loadMoreErrorKey),
                 itemBuilder: (context, index) => Container(),
                 onFetchData: () {},

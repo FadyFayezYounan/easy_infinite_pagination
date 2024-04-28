@@ -36,8 +36,10 @@ class PostListViewScreen extends StatelessWidget {
                   // here we add a custom error screen if the state is an error state.
                   // and this screen will be shown if an error occurs while fetching data for the first page.
                   firstPageErrorBuilder: state is PostsFetchError
-                      ? (context) =>
-                          CustomErrorScreen(errorMessage: state.message)
+                      ? (context, onRetry) => CustomErrorScreen(
+                            errorMessage: state.message,
+                            onRetry: onRetry,
+                          )
                       : null,
                   // this method will be called when the user reaches the end of the list or for the first page.
                   onFetchData: () async {

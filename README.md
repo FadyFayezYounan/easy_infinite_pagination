@@ -12,7 +12,7 @@ The Easy Infinite Pagination package makes it easy to add infinite pagination to
 
 ## Features
 
-- **Easy to use**: Simply provide the package with a `PaginationDelegate` object, which contains all the necessary information for a paginated layout, such as the item count, item builder, loading indicator builder, error indicator builder, no more items indicator builder, loading state, error state, and more.
+- **Easy to use**: This package is designed to function similarly to standard Flutter widgets like ListView, without the need for additional controllers. Unlike many other packages, which often require custom controllers, you can think of `easy_infinite_pagination` as an enhanced version of `ListView`, `GridView`, and `PageView`.
 
 - **Customizable:**: You can customize the appearance of the pagination indicators as you like, Include `firstPageLoading`, `firstPageError`, `firstPageNoItemsFound`, `loadMoreLoading`, `loadMoreError`, and `loadMoreReachedLastPage`.
 
@@ -112,14 +112,14 @@ InfiniteListView(
     onFetchData: _fetchData,
     firstPageLoadingBuilder: (context) =>
         const FirstPageLoadingIndicator(),
-    firstPageErrorBuilder: (context) => FirstPageErrorIndicator(
-      onRetry: _fetchData,
+    firstPageErrorBuilder: (context, onRetry) => FirstPageErrorIndicator(
+      onRetry: onRetry,
     ),
     firstPageNoItemsBuilder: (context) =>
         const FirstPageNoItemsFoundedIndicator(),
     loadMoreLoadingBuilder: (context) => const LoadMoreLoadingIndicator(),
-    loadMoreErrorBuilder: (context) => LoadMoreErrorIndicator(
-      onRetry: _fetchData,
+    loadMoreErrorBuilder: (context, onRetry) => LoadMoreErrorIndicator(
+      onRetry: onRetry,
     ),
     loadMoreNoMoreItemsBuilder: (context) =>
         const LoadMoreNoMoreItemsIndicator(),
@@ -168,8 +168,8 @@ InfiniteListView.separated(
     // here we add a custom error screen if the state is an error state.
     // and this screen will be shown if an error occurs while fetching data for the first page.
     firstPageErrorBuilder: state is PostsFetchError
-      ? (context) =>
-      CustomErrorScreen(errorMessage: state.message)
+      ? (context, onRetry) =>
+      CustomErrorScreen(errorMessage: state.message, onRetry: onRetry)
       : null,
     // this method will be called when the user reaches the end of the list or for the first page.
     onFetchData: () async {
