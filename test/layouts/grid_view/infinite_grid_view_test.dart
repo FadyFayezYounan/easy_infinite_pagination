@@ -169,15 +169,4 @@ extension on WidgetTester {
       ),
     );
   }
-
-  Future<void> pumpApp(Widget child) {
-    return pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(),
-          body: child,
-        ),
-      ),
-    );
-  }
 }
