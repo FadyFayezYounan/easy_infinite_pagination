@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Make PaginationDelegate extendable.
+
 ## 0.0.3
 
 * Add Retry Callback for `firstPageErrorBuilder` and `loadMoreErrorBuilder`.

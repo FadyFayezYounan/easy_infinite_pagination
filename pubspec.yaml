@@ -1,6 +1,6 @@
 name: easy_infinite_pagination
 description: "The Easy Infinite Pagination package provides a simple and customizable way to implement infinite pagination in your Flutter applications."
-version: 0.0.3
+version: 0.0.4
 homepage: 'https://github.com/FadyFayezYounan/easy_infinite_pagination.git'
 
 topics:
