@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Add Retry Callback for `firstPageErrorBuilder` and `loadMoreErrorBuilder`.
+
 ## 0.0.2
 
 * Update Readme.

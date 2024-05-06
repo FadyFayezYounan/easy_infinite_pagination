@@ -4,7 +4,7 @@ import 'package:flutter/material.dart'
 import '../utils/utils.dart';
 import 'pagination_status.dart';
 
-final class PaginationDelegate {
+class PaginationDelegate {
   /// A class that represents a pagination delegate for building paginated layouts.
   ///
   /// It contains all the necessary information for a paginated layout, such as

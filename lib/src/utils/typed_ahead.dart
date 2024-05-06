@@ -6,6 +6,8 @@ import 'package:flutter/material.dart'
         WidgetBuilder,
         VoidCallback;
 
+import '../models/models.dart';
+
 /// A function type that takes in several parameters and returns a [Widget].
 ///
 /// This function is used to build a [Widget] that represents a layout of child widgets.
