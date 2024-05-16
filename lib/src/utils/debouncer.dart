@@ -5,7 +5,7 @@ import 'dart:ui';
 /// execution of a function. This is useful in situations where the function
 /// is called multiple times in a short period of time and we want to execute
 /// the function only once after the delay has passed.
-class Debouncer {
+final class Debouncer {
   /// The delay after the last invocation of the callback function before it is executed.
   final Duration _delay;
 
