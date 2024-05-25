@@ -1,3 +1,7 @@
+## 0.0.6
+
+- Remove unnecessary prototypeItem from InfiniteListView.separated.
+
 ## 0.0.5
 
 - Make package reusable typed ahead visible for use.
