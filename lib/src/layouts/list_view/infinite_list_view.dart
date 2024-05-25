@@ -53,17 +53,13 @@ class InfiniteListView extends BoxScrollView {
     super.restorationId,
     super.clipBehavior,
     this.itemExtent,
-    this.prototypeItem,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
     required this.delegate,
     required IndexedWidgetBuilder separatorBuilder,
     super.shrinkWrap,
-  })  : assert(
-          itemExtent == null || prototypeItem == null,
-          'Only one of itemExtent or prototypeItem can be used, not both',
-        ),
+  })  : prototypeItem = null,
         _enableShrinkWrapForFirstPageIndicators = shrinkWrap,
         _separatorBuilder = separatorBuilder;
 

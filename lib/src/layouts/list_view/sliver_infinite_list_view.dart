@@ -108,8 +108,8 @@ class SliverInfiniteListView extends StatelessWidget {
 
   /// Builds a sliver list widget based on the given parameters.
   ///
-  /// This method builds a sliver list widget based on the provided [BuildContext],
-  /// [itemBuilder], [itemCount], and [bottomLoaderBuilder]. It also handles the logic
+  /// This method builds a sliver list widget based on the provided [itemBuilder],
+  /// [itemCount], and [bottomLoaderBuilder]. It also handles the logic
   /// for separating the items in the sliver, if needed, and configures the delegate
   /// with the appropriate parameters.
   ///
@@ -120,36 +120,55 @@ class SliverInfiniteListView extends StatelessWidget {
   ///   * [bottomLoaderBuilder] - The optional builder for the bottom loader widget.
   ///
   /// Returns:
-  ///   * A [SliverList], [SliverFixedExtentList], or [SliverPrototypeExtentList] widget.
+  ///   * A [SliverList], [SliverList.builder], [SliverFixedExtentList], or [SliverPrototypeExtentList] widget.
   SliverMultiBoxAdaptorWidget _buildSliverList(
     BuildContext context,
     IndexedWidgetBuilder itemBuilder,
     int itemCount,
     WidgetBuilder? bottomLoaderBuilder,
   ) {
-    // Build the sliver delegate.
-    final delegate = _buildSliverDelegate(
+    // Create a sliver child delegate using the provided parameters.
+    //
+    // The delegate is used to configure the sliver list with the appropriate parameters.
+    // It also handles the logic for separating the items in the sliver, if needed.
+    //
+    // Parameters:
+    //   * [itemBuilder] - The builder responsible for building the child widgets of the sliver.
+    //   * [itemCount] - The total number of items in the sliver.
+    //   * [bottomLoaderBuilder] - The optional builder for the bottom loader widget.
+    //
+    // Returns:
+    //   * A [SliverChildDelegate] object which can be used to configure the sliver list.
+    final delegate = _getSliverChildDelegate(
       itemBuilder,
       itemCount,
       bottomLoaderBuilder: bottomLoaderBuilder,
     );
-
-    // Check if the item has a fixed extent or a prototype item.
-    final isNormalSliverList = (itemExtent == null && prototypeItem == null) ||
-        _separatorBuilder != null;
+    // Determine if the sliver list is a normal sliver list or not.
+    //
+    // A normal sliver list is a sliver list that does not have a fixed item extent or
+    // a prototype item. It is also a sliver list that does not have a separator builder.
+    final isNormalSliverList =
+        // Check if the item extent is null and the prototype item is null.
+        // If both are null, the sliver list is a normal sliver list.
+        (itemExtent == null && prototypeItem == null) ||
+            _separatorBuilder != null;
+    // Check if the sliver list is a normal sliver list.
+    // If so, return a SliverList widget.
     if (isNormalSliverList) {
-      // If not, return a sliver list widget.
       return SliverList(
         delegate: delegate,
       );
-    } else if (itemExtent != null) {
-      // If it has a fixed extent, return a sliver fixed extent list widget.
+    }
+    // If the sliver list has a fixed item extent, return a SliverFixedExtentList widget.
+    else if (itemExtent != null) {
       return SliverFixedExtentList(
         itemExtent: itemExtent!,
         delegate: delegate,
       );
-    } else {
-      // If it has a prototype item, return a sliver prototype extent list widget.
+    }
+    // If the sliver list has a prototype item, return a SliverPrototypeExtentList widget.
+    else {
       return SliverPrototypeExtentList(
         prototypeItem: prototypeItem!,
         delegate: delegate,
@@ -169,7 +188,7 @@ class SliverInfiniteListView extends StatelessWidget {
   ///   * [itemCount]: The total number of items in the Sliver.
   ///   * [bottomLoaderBuilder]: The optional builder for the bottom loader widget.
 
-  SliverChildBuilderDelegate _buildSliverDelegate(
+  SliverChildBuilderDelegate _getSliverChildDelegate(
     IndexedWidgetBuilder itemBuilder,
     int itemCount, {
     WidgetBuilder? bottomLoaderBuilder,
