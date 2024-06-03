@@ -127,7 +127,7 @@ class InfiniteListView extends BoxScrollView {
         ),
       _ => SliverInfiniteListView.separated(
           delegate: delegate,
-          separatorBuilder: _separatorBuilder,
+          separatorBuilder: _separatorBuilder??(context,value)=> SizedBox(),
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addRepaintBoundaries: addRepaintBoundaries,
           addSemanticIndexes: addSemanticIndexes,
