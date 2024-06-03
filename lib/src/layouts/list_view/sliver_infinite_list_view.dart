@@ -208,7 +208,7 @@ class SliverInfiniteListView extends StatelessWidget {
           builder: itemBuilder,
           childCount: itemCount,
           bottomLoaderBuilder: bottomLoaderBuilder,
-          separatorBuilder: _separatorBuilder,
+        separatorBuilder: _separatorBuilder??(context,value)=> SizedBox(),
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addRepaintBoundaries: addRepaintBoundaries,
           addSemanticIndexes: addSemanticIndexes,
